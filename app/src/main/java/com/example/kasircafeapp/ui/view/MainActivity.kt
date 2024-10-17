@@ -4,9 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.kasircafeapp.R
 import com.example.kasircafeapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -20,22 +17,22 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.buttonTransaksi.setOnClickListener{
-            val intent = Intent(this, SecondActivity::class.java)
+            val intent = Intent(this, TransaksiActivity::class.java)
             startActivity(intent)
         }
 
         binding.buttonMakanan.setOnClickListener{
-            val intent = Intent(this, ThirdActivity::class.java)
+            val intent = Intent(this, MakananActivity::class.java)
             startActivity(intent)
         }
 
         binding.buttonMinuman.setOnClickListener{
-            val intent = Intent(this, FourthActivity::class.java)
+            val intent = Intent(this, MinumanActivity::class.java)
             startActivity(intent)
         }
 
         binding.buttonAdmin.setOnClickListener{
-            val intent = Intent(this, FifthActivity::class.java)
+            val intent = Intent(this, AdminActivity::class.java)
             startActivity(intent)
         }
 
