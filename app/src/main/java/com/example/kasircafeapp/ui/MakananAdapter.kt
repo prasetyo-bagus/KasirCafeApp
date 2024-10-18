@@ -9,7 +9,7 @@ import com.example.kasircafeapp.databinding.ItemMakananBinding
 class MakananAdapter(
     private val onDeleteClick: (Makanan) -> Unit,
     private val onEditClick: (Makanan) -> Unit
-) : RecyclerView.Adapter<MakananAdapter.MakananVigit ewHolder>() {
+) : RecyclerView.Adapter<MakananAdapter.MakananViewHolder>() {
 
     private var makananList = listOf<Makanan>()
 
