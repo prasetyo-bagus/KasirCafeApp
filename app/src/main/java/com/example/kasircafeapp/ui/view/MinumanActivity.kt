@@ -60,6 +60,7 @@ class MinumanActivity : AppCompatActivity(), MinumanAdapter.OnItemClickListener 
             val selectedMinuman = minumanAdapter.getSelectedMinuman()
             if (selectedMinuman != null) {
                 minumanViewModel.delete(selectedMinuman)
+                clearInputs()
             }
         }
 
