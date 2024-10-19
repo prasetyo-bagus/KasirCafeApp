@@ -20,6 +20,18 @@ class MakananActivity : AppCompatActivity() {
         binding = ActivityMakananBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.apply {
+            title = "Makanan" // Title of the activity
+            setDisplayHomeAsUpEnabled(true) // Show the back button
+            setDisplayShowHomeEnabled(true)
+        }
+
+        // Handle toolbar back button click (similar to WhatsApp behavior)
+        binding.toolbar.setNavigationOnClickListener {
+            finish() // Close this activity and go back
+        }
+
         val adapter = MakananAdapter(
             onDeleteClick = { makanan -> makananViewModel.delete(makanan) },
             onEditClick = { makanan -> showTambahMakananFragment(makanan) } // Panggil fungsi edit
