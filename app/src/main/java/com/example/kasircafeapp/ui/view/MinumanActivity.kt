@@ -32,16 +32,13 @@ class MinumanActivity : AppCompatActivity(), MinumanAdapter.OnItemClickListener 
             finish()
         }
 
-
         minumanAdapter = MinumanAdapter(this)
         binding.recyclerViewMinuman.adapter = minumanAdapter
         binding.recyclerViewMinuman.layoutManager = LinearLayoutManager(this)
 
-
         minumanViewModel.allMinuman.observe(this) { minumanList ->
             minumanAdapter.submitList(minumanList)
         }
-
 
         binding.floatingbuttonadd.setOnClickListener {
             val namaMinuman = binding.inputtextminuman.editText?.text.toString()
@@ -55,7 +52,6 @@ class MinumanActivity : AppCompatActivity(), MinumanAdapter.OnItemClickListener 
             }
         }
 
-
         binding.floatingbuttondelete.setOnClickListener {
             val selectedMinuman = minumanAdapter.getSelectedMinuman()
             if (selectedMinuman != null) {
@@ -63,7 +59,6 @@ class MinumanActivity : AppCompatActivity(), MinumanAdapter.OnItemClickListener 
                 clearInputs()
             }
         }
-
 
         binding.floatingbuttonedit.setOnClickListener {
             val selectedMinuman = minumanAdapter.getSelectedMinuman()
