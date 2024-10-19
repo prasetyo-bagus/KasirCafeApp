@@ -14,7 +14,7 @@ class MinumanAdapter(private val listener: OnItemClickListener) : ListAdapter<Mi
 
     private var selectedMinuman: Minuman? = null
 
-    // Interface untuk menangani klik item
+
     interface OnItemClickListener {
         fun onItemClick(minuman: Minuman)
     }
@@ -29,11 +29,10 @@ class MinumanAdapter(private val listener: OnItemClickListener) : ListAdapter<Mi
             tvHargaMinuman.text = minuman.harga_minuman.toString()
             tvKategoriMinuman.text = minuman.kategori_minuman
 
-            // Tambahkan listener untuk itemView
             itemView.setOnClickListener {
-                selectedMinuman = minuman // Simpan item yang dipilih
-                listener.onItemClick(minuman) // Panggil listener saat item diklik
-                notifyDataSetChanged() // Memperbarui tampilan
+                selectedMinuman = minuman
+                listener.onItemClick(minuman)
+                notifyDataSetChanged()
             }
         }
     }
@@ -53,7 +52,7 @@ class MinumanAdapter(private val listener: OnItemClickListener) : ListAdapter<Mi
         return selectedMinuman
     }
 
-    // DiffUtil untuk memudahkan pembaruan daftar
+
     class MinumanDiffCallback : DiffUtil.ItemCallback<Minuman>() {
         override fun areItemsTheSame(oldItem: Minuman, newItem: Minuman): Boolean {
             return oldItem.id_minuman == newItem.id_minuman

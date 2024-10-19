@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.05" />
+        app:layout_constraintGuide_percent="0.08" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_left"
@@ -57,13 +57,6 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.95" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingbuttonadd"
         android:layout_width="wrap_content"
@@ -73,7 +66,9 @@
         android:contentDescription="buttonadd"
         app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
         app:layout_constraintRight_toRightOf="@id/guideline_right"
-        app:srcCompat="@drawable/ic_add" />
+        app:srcCompat="@drawable/ic_add"
+        android:backgroundTint="@color/gojek_green"
+        app:tint="@color/white"/>
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -85,7 +80,9 @@
         android:contentDescription="buttondelete"
         app:layout_constraintBottom_toTopOf="@id/floatingbuttonedit"
         app:layout_constraintRight_toRightOf="@id/guideline_right"
-        app:srcCompat="@drawable/ic_delete"/>
+        app:srcCompat="@drawable/ic_delete"
+        android:backgroundTint="@color/gofood_red"
+        app:tint="@color/white"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingbuttonedit"
@@ -96,7 +93,22 @@
         android:contentDescription="buttonedit"
         app:layout_constraintBottom_toTopOf="@id/floatingbuttonadd"
         app:layout_constraintRight_toRightOf="@id/guideline_right"
-        app:srcCompat="@drawable/ic_edit"/>
+        app:srcCompat="@drawable/ic_edit"
+        android:backgroundTint="#FF9800"
+        app:tint="@color/white"/>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:elevation="4dp"
+        android:title="minuman List"
+        android:titleTextColor="@android:color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputtextminuman"
@@ -163,4 +175,17 @@
         app:layout_constraintRight_toRightOf="@id/guideline_right"
         app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
         app:layout_constraintTop_toBottomOf="@id/guidline_mid2"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="List Minuman"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/guidline_mid2"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintHorizontal_bias="0.063"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/inputtextkategoriminuman"
+        app:layout_constraintVertical_bias="0.629" />
 </androidx.constraintlayout.widget.ConstraintLayout>
