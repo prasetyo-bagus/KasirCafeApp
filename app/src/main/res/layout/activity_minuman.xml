@@ -27,14 +27,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.8" />
+        app:layout_constraintGuide_percent="0.41" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidline_mid2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.4" />
+        app:layout_constraintGuide_percent="0.43" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidline_mid"
@@ -61,11 +61,12 @@
         android:id="@+id/floatingbuttonadd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
         android:clickable="true"
         android:contentDescription="buttonadd"
-        app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
-        app:layout_constraintRight_toRightOf="@id/guideline_right"
+        app:layout_constraintLeft_toRightOf="@id/guideline_mid"
+        app:layout_constraintRight_toLeftOf="@id/floatingbuttonedit"
+        app:layout_constraintBottom_toTopOf="@id/guidline_mid2"
+        app:layout_constraintTop_toBottomOf="@id/inputtextkategoriminuman"
         app:srcCompat="@drawable/ic_add"
         android:backgroundTint="@color/gojek_green"
         app:tint="@color/white"/>
@@ -75,11 +76,12 @@
         android:id="@+id/floatingbuttondelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:clickable="true"
         android:contentDescription="buttondelete"
-        app:layout_constraintBottom_toTopOf="@id/floatingbuttonedit"
-        app:layout_constraintRight_toRightOf="@id/guideline_right"
+        app:layout_constraintLeft_toRightOf="@id/floatingbuttonedit"
+        app:layout_constraintRight_toLeftOf="@id/guideline_right"
+        app:layout_constraintBottom_toTopOf="@id/guidline_mid2"
+        app:layout_constraintTop_toBottomOf="@id/inputtextkategoriminuman"
         app:srcCompat="@drawable/ic_delete"
         android:backgroundTint="@color/gofood_red"
         app:tint="@color/white"/>
@@ -88,14 +90,17 @@
         android:id="@+id/floatingbuttonedit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:backgroundTint="#FF9800"
         android:clickable="true"
         android:contentDescription="buttonedit"
-        app:layout_constraintBottom_toTopOf="@id/floatingbuttonadd"
-        app:layout_constraintRight_toRightOf="@id/guideline_right"
+        app:layout_constraintLeft_toRightOf="@id/guideline_mid"
+        app:layout_constraintRight_toLeftOf="@id/guideline_right"
+        app:layout_constraintBottom_toTopOf="@id/guidline_mid2"
+        app:layout_constraintTop_toBottomOf="@id/inputtextkategoriminuman"
         app:srcCompat="@drawable/ic_edit"
-        android:backgroundTint="#FF9800"
-        app:tint="@color/white"/>
+        app:tint="@color/white"
+        tools:layout_editor_absoluteX="66dp"
+        tools:layout_editor_absoluteY="8dp" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -171,6 +176,7 @@
         android:id="@+id/recyclerViewMinuman"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        tools:listitem="@layout/style_minuman"
         app:layout_constraintLeft_toLeftOf="@id/guideline_left"
         app:layout_constraintRight_toRightOf="@id/guideline_right"
         app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
@@ -180,12 +186,12 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
         android:text="List Minuman"
+        android:textStyle="bold"
         android:textSize="18dp"
         app:layout_constraintBottom_toTopOf="@+id/guidline_mid2"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-        app:layout_constraintHorizontal_bias="0.063"
+        app:layout_constraintRight_toRightOf="@id/guideline_mid"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/inputtextkategoriminuman"
-        app:layout_constraintVertical_bias="0.629" />
+        app:layout_constraintTop_toBottomOf="@+id/inputtextkategoriminuman" />
 </androidx.constraintlayout.widget.ConstraintLayout>
