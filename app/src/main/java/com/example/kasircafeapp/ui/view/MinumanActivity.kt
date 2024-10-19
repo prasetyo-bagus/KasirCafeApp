@@ -21,17 +21,28 @@ class MinumanActivity : AppCompatActivity(), MinumanAdapter.OnItemClickListener 
         binding = ActivityMinumanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Initialize RecyclerView
-        minumanAdapter = MinumanAdapter(this) // Gunakan 'minumanAdapter' sebagai instance
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.apply {
+            title = "Minuman"
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
+        }
+
+        binding.toolbar.setNavigationOnClickListener {
+            finish()
+        }
+
+
+        minumanAdapter = MinumanAdapter(this)
         binding.recyclerViewMinuman.adapter = minumanAdapter
         binding.recyclerViewMinuman.layoutManager = LinearLayoutManager(this)
 
-        // Observe the LiveData from ViewModel and update RecyclerView
+
         minumanViewModel.allMinuman.observe(this) { minumanList ->
             minumanAdapter.submitList(minumanList)
         }
 
-        // Add new Minuman
+
         binding.floatingbuttonadd.setOnClickListener {
             val namaMinuman = binding.inputtextminuman.editText?.text.toString()
             val hargaMinuman = binding.inputtextharga.editText?.text.toString().toIntOrNull()
@@ -40,11 +51,11 @@ class MinumanActivity : AppCompatActivity(), MinumanAdapter.OnItemClickListener 
             if (namaMinuman.isNotEmpty() && hargaMinuman != null) {
                 val minuman = Minuman(nama_minuman = namaMinuman, harga_minuman = hargaMinuman, kategori_minuman = kategoriMinuman)
                 minumanViewModel.insert(minuman)
-                clearInputs() // Hapus input setelah menambahkan
+                clearInputs()
             }
         }
 
-        // Delete selected Minuman
+
         binding.floatingbuttondelete.setOnClickListener {
             val selectedMinuman = minumanAdapter.getSelectedMinuman()
             if (selectedMinuman != null) {
@@ -52,7 +63,7 @@ class MinumanActivity : AppCompatActivity(), MinumanAdapter.OnItemClickListener 
             }
         }
 
-        // Edit selected Minuman
+
         binding.floatingbuttonedit.setOnClickListener {
             val selectedMinuman = minumanAdapter.getSelectedMinuman()
             if (selectedMinuman != null) {
@@ -63,20 +74,18 @@ class MinumanActivity : AppCompatActivity(), MinumanAdapter.OnItemClickListener 
                 if (namaMinuman.isNotEmpty() && hargaMinuman != null) {
                     val updatedMinuman = selectedMinuman.copy(nama_minuman = namaMinuman, harga_minuman = hargaMinuman, kategori_minuman = kategoriMinuman)
                     minumanViewModel.insert(updatedMinuman)
-                    clearInputs() // Hapus input setelah mengedit
+                    clearInputs()
                 }
             }
         }
     }
 
     override fun onItemClick(minuman: Minuman) {
-        // Set input fields with selected Minuman data
         binding.inputtextminuman.editText?.setText(minuman.nama_minuman)
         binding.inputtextharga.editText?.setText(minuman.harga_minuman.toString())
         binding.inputtextkategoriminuman.editText?.setText(minuman.kategori_minuman)
     }
 
-    // Fungsi untuk membersihkan input setelah tambah atau edit
     private fun clearInputs() {
         binding.inputtextminuman.editText?.text?.clear()
         binding.inputtextharga.editText?.text?.clear()
