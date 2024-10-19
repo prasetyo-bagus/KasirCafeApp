@@ -14,7 +14,11 @@ class TambahMakananFragment : Fragment() {
     private var _binding: FragmentTambahMakananBinding? = null
     private val binding get() = _binding!!
     private lateinit var makananViewModel: MakananViewModel
-    private var makananToEdit: Makanan? = null
+    private var makanan: Makanan? = null // Variabel untuk menyimpan makanan yang diedit
+
+    fun setMakanan(makanan: Makanan?) {
+        this.makanan = makanan // Menyimpan makanan
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,12 +31,10 @@ class TambahMakananFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Mendapatkan ViewModel dari activity
         makananViewModel = (activity as MakananActivity).makananViewModel
 
-        // Jika mode edit, isi form dengan data makanan
-        makananToEdit = arguments?.getParcelable("makanan")
-        makananToEdit?.let {
+        // Mengisi data jika makanan tidak null
+        makanan?.let {
             binding.editTextNama.setText(it.nama)
             binding.editTextHarga.setText(it.harga.toString())
             binding.editTextDeskripsi.setText(it.deskripsi)
@@ -40,17 +42,18 @@ class TambahMakananFragment : Fragment() {
         }
 
         binding.buttonSimpan.setOnClickListener {
-            val makanan = Makanan(
-                id_makanan = makananToEdit?.id_makanan ?: 0,  // Jika mode edit, gunakan id yang sama
+            val newMakanan = Makanan(
+                id_makanan = makanan?.id_makanan ?: 0,
                 nama = binding.editTextNama.text.toString(),
                 harga = binding.editTextHarga.text.toString().toDouble(),
                 deskripsi = binding.editTextDeskripsi.text.toString(),
                 kategori = binding.editTextKategori.text.toString()
             )
-            if (makananToEdit == null) {
-                makananViewModel.insert(makanan)
+
+            if (makanan == null) {
+                makananViewModel.insert(newMakanan)
             } else {
-                makananViewModel.update(makanan)
+                makananViewModel.update(newMakanan)
             }
             (activity as MakananActivity).hideTambahMakananFragment()
         }
@@ -59,15 +62,5 @@ class TambahMakananFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    companion object {
-        fun newInstance(makanan: Makanan?): TambahMakananFragment {
-            val fragment = TambahMakananFragment()
-            val args = Bundle()
-            args.putParcelable("makanan", makanan)
-            fragment.arguments = args
-            return fragment
-        }
     }
 }

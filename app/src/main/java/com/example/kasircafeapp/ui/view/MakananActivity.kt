@@ -20,37 +20,46 @@ class MakananActivity : AppCompatActivity() {
         binding = ActivityMakananBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setupToolbar()
+        setupRecyclerView()
+        observeViewModel()
+
+        binding.fabAddMakanan.setOnClickListener {
+            showTambahMakananFragment(null)
+        }
+    }
+
+    private fun setupToolbar() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.apply {
-            title = "Makanan" // Title of the activity
-            setDisplayHomeAsUpEnabled(true) // Show the back button
+            title = "Makanan"
+            setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
         }
-
-        // Handle toolbar back button click (similar to WhatsApp behavior)
         binding.toolbar.setNavigationOnClickListener {
-            finish() // Close this activity and go back
+            finish()
         }
+    }
 
+    private fun setupRecyclerView() {
         val adapter = MakananAdapter(
             onDeleteClick = { makanan -> makananViewModel.delete(makanan) },
-            onEditClick = { makanan -> showTambahMakananFragment(makanan) } // Panggil fungsi edit
+            onEditClick = { makanan -> showTambahMakananFragment(makanan) }
         )
         binding.recyclerViewMakanan.adapter = adapter
         binding.recyclerViewMakanan.layoutManager = LinearLayoutManager(this)
+    }
 
+    private fun observeViewModel() {
         makananViewModel.allMakanan.observe(this) { makananList ->
-            makananList?.let { adapter.setMakanan(it) }
-        }
-
-        // Tombol tambah makanan
-        binding.fabAddMakanan.setOnClickListener {
-            showTambahMakananFragment(null) // Null untuk mode tambah
+            makananList?.let { (binding.recyclerViewMakanan.adapter as MakananAdapter).setMakanan(it) }
         }
     }
 
     private fun showTambahMakananFragment(makanan: Makanan?) {
-        val fragment = TambahMakananFragment.newInstance(makanan)
+        val fragment = TambahMakananFragment().apply {
+            setMakanan(makanan)
+        }
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragmentContainer, fragment)
         fragmentTransaction.addToBackStack(null)

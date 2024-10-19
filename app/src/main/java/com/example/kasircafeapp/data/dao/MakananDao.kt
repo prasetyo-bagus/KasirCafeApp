@@ -15,6 +15,6 @@ interface MakananDao {
     @Delete
     suspend fun delete(makanan: Makanan)
 
-    @Query("SELECT * FROM makanan ORDER BY nama ASC")
+    @Query("SELECT * FROM makanan")
     fun getAllMakanan(): LiveData<List<Makanan>>
 }
