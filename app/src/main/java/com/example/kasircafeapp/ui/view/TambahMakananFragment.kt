@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import com.example.kasircafeapp.data.entity.Makanan
 import com.example.kasircafeapp.databinding.FragmentTambahMakananBinding
 import com.example.kasircafeapp.ui.viewmodel.MakananViewModel
