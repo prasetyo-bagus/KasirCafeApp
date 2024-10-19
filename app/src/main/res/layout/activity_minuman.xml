@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.35" />
+        app:layout_constraintGuide_percent="0.4" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_left"
@@ -91,6 +91,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:clickable="true"
+        android:contentDescription="buttonadd"
         app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
         app:layout_constraintRight_toRightOf="@id/guideline_right"
         app:srcCompat="@drawable/ic_add" />
@@ -102,6 +103,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:clickable="true"
+        android:contentDescription="buttondelete"
         app:layout_constraintBottom_toTopOf="@id/floatingbuttonedit"
         app:layout_constraintRight_toRightOf="@id/guideline_right"
         app:srcCompat="@drawable/ic_delete"/>
@@ -112,6 +114,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:clickable="true"
+        android:contentDescription="buttonedit"
         app:layout_constraintBottom_toTopOf="@id/floatingbuttonadd"
         app:layout_constraintRight_toRightOf="@id/guideline_right"
         app:srcCompat="@drawable/ic_edit"/>
@@ -141,6 +144,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:hint="Masukkan Harga"/>
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
