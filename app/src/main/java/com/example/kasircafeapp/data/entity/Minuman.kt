@@ -8,6 +8,6 @@ data class Minuman(
     @PrimaryKey(autoGenerate = true)
     val id_minuman: Int = 0,
     val nama_minuman: String,
-    val harga_minuman: Double,
-    val kategoti_minuman: String
+    val harga_minuman: Int?,
+    val kategori_minuman: String
 )

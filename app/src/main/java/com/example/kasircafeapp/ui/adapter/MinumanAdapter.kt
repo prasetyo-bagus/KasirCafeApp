@@ -1,0 +1,66 @@
+package com.example.kasircafeapp.ui.adapter
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.example.kasircafeapp.R
+import com.example.kasircafeapp.data.entity.Minuman
+
+class MinumanAdapter(private val listener: OnItemClickListener) : ListAdapter<Minuman, MinumanAdapter.MinumanViewHolder>(MinumanDiffCallback()) {
+
+    private var selectedMinuman: Minuman? = null
+
+    // Interface untuk menangani klik item
+    interface OnItemClickListener {
+        fun onItemClick(minuman: Minuman)
+    }
+
+    inner class MinumanViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val tvNamaMinuman: TextView = itemView.findViewById(R.id.outputnamaminuman)
+        private val tvHargaMinuman: TextView = itemView.findViewById(R.id.outputhargaminuman)
+        private val tvKategoriMinuman: TextView = itemView.findViewById(R.id.textView)
+
+        fun bind(minuman: Minuman) {
+            tvNamaMinuman.text = minuman.nama_minuman
+            tvHargaMinuman.text = minuman.harga_minuman.toString()
+            tvKategoriMinuman.text = minuman.kategori_minuman
+
+            // Tambahkan listener untuk itemView
+            itemView.setOnClickListener {
+                selectedMinuman = minuman // Simpan item yang dipilih
+                listener.onItemClick(minuman) // Panggil listener saat item diklik
+                notifyDataSetChanged() // Memperbarui tampilan
+            }
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MinumanViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.style_minuman, parent, false)
+        return MinumanViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: MinumanViewHolder, position: Int) {
+        holder.bind(getItem(position))
+    }
+
+    override fun getItemCount(): Int = currentList.size
+
+    fun getSelectedMinuman(): Minuman? {
+        return selectedMinuman
+    }
+
+    // DiffUtil untuk memudahkan pembaruan daftar
+    class MinumanDiffCallback : DiffUtil.ItemCallback<Minuman>() {
+        override fun areItemsTheSame(oldItem: Minuman, newItem: Minuman): Boolean {
+            return oldItem.id_minuman == newItem.id_minuman
+        }
+
+        override fun areContentsTheSame(oldItem: Minuman, newItem: Minuman): Boolean {
+            return oldItem == newItem
+        }
+    }
+}
