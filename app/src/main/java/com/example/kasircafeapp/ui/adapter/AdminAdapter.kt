@@ -17,13 +17,9 @@ class AdminAdapter(
         fun bind(admin: Admin) {
             binding.admin = admin
             binding.executePendingBindings()
-
-            // Set onClick listener for Edit button
             binding.btnEdit.setOnClickListener {
                 onEditClick(admin)
             }
-
-            // Set onClick listener for Delete button
             binding.btnDelete.setOnClickListener {
                 onDeleteClick(admin)
             }

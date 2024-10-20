@@ -24,7 +24,7 @@ interface AdminDao {
     suspend fun getAdmin(username: String, password: String): Admin?
 
     @Query("SELECT * FROM admin_table")
-    fun getAllAdmins(): LiveData<List<Admin>> // Mengubah List menjadi LiveData
+    fun getAllAdmins(): LiveData<List<Admin>>
 
 //    @Query("SELECT * FROM admin_table")
 //    fun getAllAdmins(): LiveData<List<Admin>>

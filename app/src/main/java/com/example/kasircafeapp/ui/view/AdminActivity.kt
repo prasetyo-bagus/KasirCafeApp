@@ -11,6 +11,7 @@ import com.example.kasircafeapp.R
 import com.example.kasircafeapp.data.entity.Admin
 import com.example.kasircafeapp.databinding.ActivityAdminBinding
 import com.example.kasircafeapp.ui.adapter.AdminAdapter
+import com.example.kasircafeapp.ui.view.fragment.FormAdminFragment
 import com.example.kasircafeapp.ui.viewmodel.AdminViewModel
 
 class AdminActivity : AppCompatActivity() {
@@ -22,10 +23,8 @@ class AdminActivity : AppCompatActivity() {
         binding = ActivityAdminBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // RecyclerView setup
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Mengamati LiveData untuk perubahan
         adminViewModel.getAllAdmins().observe(this, Observer { adminList ->
             if (adminList != null) {
                 binding.recyclerView.adapter = AdminAdapter(adminList, { admin ->
@@ -62,13 +61,10 @@ class AdminActivity : AppCompatActivity() {
             replace(R.id.fragment_container, fragment)
             addToBackStack(null)
         }
-
-        // Sembunyikan daftar admin ketika form terbuka
         binding.batas.visibility = View.GONE
     }
 
     fun hideEditAdminFragment() {
-        // Tampilkan kembali daftar admin ketika form ditutup
         binding.batas.visibility = View.VISIBLE
         supportFragmentManager.popBackStack()
     }
