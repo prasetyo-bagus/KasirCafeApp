@@ -7,56 +7,266 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/editTextNama"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="96dp"
-            android:hint="Nama Makanan"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/editTextHarga"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:hint="Harga"
-            android:inputType="number"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextKategori" />
-
-        <EditText
-            android:id="@+id/editTextDeskripsi"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:hint="Deskripsi"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextNama" />
-
-        <EditText
-            android:id="@+id/editTextKategori"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:hint="Kategori"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextDeskripsi" />
-
-        <Button
-            android:id="@+id/buttonSimpan"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gh1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Simpan"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextHarga"
-            app:layout_constraintVertical_bias="0.307" />
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.02" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gh2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.10" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gh3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.12" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gh4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.98" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.02" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.98" />
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="6dp"
+            app:cardBackgroundColor="#f5f5f5"
+            app:layout_constraintStart_toEndOf="@id/gv1"
+            app:layout_constraintEnd_toStartOf="@id/gv2"
+            app:layout_constraintTop_toBottomOf="@id/gh3"
+            app:layout_constraintBottom_toTopOf="@id/gh4">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="top|center_horizontal"
+                    android:text="Form Makanan"
+                    android:textStyle="bold"
+                    android:textSize="26sp"
+                    app:layout_constraintBottom_toTopOf="@+id/editTextNama"
+                    app:layout_constraintEnd_toStartOf="@+id/gvc4"
+                    app:layout_constraintStart_toStartOf="@+id/gvc1"
+                    app:layout_constraintTop_toTopOf="@+id/ghc1" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/gvc1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.02" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/gvc4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.98" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/gvc2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.49" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/gvc3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.51" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/ghc1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.02" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/ghc2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.88" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/ghc3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.98" />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/ghcf1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.15" />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/ghcf2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.28" />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/ghcf3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.41" />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/ghcf4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.64" />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/ghcf5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.77" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutNama"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toTopOf="@+id/ghcf2"
+                    app:layout_constraintEnd_toStartOf="@+id/gvc4"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/gvc1"
+                    app:layout_constraintTop_toTopOf="@+id/ghcf1"
+                    android:textColorHint="#BCB0AD"
+                    app:boxCornerRadiusBottomStart="16dp"
+                    app:boxCornerRadiusTopEnd="16dp"
+                    app:boxCornerRadiusBottomEnd="16dp"
+                    app:boxCornerRadiusTopStart="16dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextNama"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Nama Makanan" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutDeskripsi"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    app:layout_constraintBottom_toTopOf="@+id/ghcf4"
+                    app:layout_constraintEnd_toStartOf="@+id/gvc4"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/gvc1"
+                    app:layout_constraintTop_toTopOf="@+id/ghcf3"
+                    android:textColorHint="#BCB0AD"
+                    app:boxCornerRadiusBottomStart="16dp"
+                    app:boxCornerRadiusTopEnd="16dp"
+                    app:boxCornerRadiusBottomEnd="16dp"
+                    app:boxCornerRadiusTopStart="16dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextDeskripsi"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Deskripsi Makanan" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutHarga"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toTopOf="@+id/ghcf3"
+                    app:layout_constraintEnd_toStartOf="@+id/gvc4"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/gvc1"
+                    app:layout_constraintTop_toTopOf="@+id/ghcf2"
+                    android:textColorHint="#BCB0AD"
+                    app:boxCornerRadiusBottomStart="16dp"
+                    app:boxCornerRadiusTopEnd="16dp"
+                    app:boxCornerRadiusBottomEnd="16dp"
+                    app:boxCornerRadiusTopStart="16dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextHarga"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Harga Makanan" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutKategori"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toTopOf="@+id/ghcf5"
+                    app:layout_constraintEnd_toStartOf="@+id/gvc4"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/gvc1"
+                    app:layout_constraintTop_toTopOf="@+id/ghcf4"
+                    android:textColorHint="#BCB0AD"
+                    app:boxCornerRadiusBottomStart="16dp"
+                    app:boxCornerRadiusTopEnd="16dp"
+                    app:boxCornerRadiusBottomEnd="16dp"
+                    app:boxCornerRadiusTopStart="16dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextKategori"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Kategori Makanan" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <Button
+                    android:id="@+id/buttonBatal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#F44336"
+                    android:text="Batal"
+                    app:layout_constraintBottom_toTopOf="@+id/ghc3"
+                    app:layout_constraintEnd_toStartOf="@+id/gvc2"
+                    app:layout_constraintStart_toStartOf="@+id/gvc1"
+                    app:layout_constraintTop_toTopOf="@+id/ghc2" />
+
+                <Button
+                    android:id="@+id/buttonSimpan"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#2196F3"
+                    android:text="Simpan"
+                    app:layout_constraintBottom_toTopOf="@+id/ghc3"
+                    app:layout_constraintEnd_toStartOf="@+id/gvc4"
+                    app:layout_constraintStart_toStartOf="@+id/gvc3"
+                    app:layout_constraintTop_toTopOf="@+id/ghc2" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

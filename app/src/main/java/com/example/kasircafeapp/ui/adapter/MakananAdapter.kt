@@ -8,7 +8,8 @@ import com.example.kasircafeapp.databinding.ItemMakananBinding
 
 class MakananAdapter(
     private val onDeleteClick: (Makanan) -> Unit,
-    private val onEditClick: (Makanan) -> Unit
+    private val onEditClick: (Makanan) -> Unit,
+    private val onDetailClick: (Makanan) -> Unit
 ) : RecyclerView.Adapter<MakananAdapter.MakananViewHolder>() {
 
     private var makananList = listOf<Makanan>()
@@ -26,6 +27,10 @@ class MakananAdapter(
 
             binding.buttonEdit.setOnClickListener {
                 onEditClick(makanan)
+            }
+
+            binding.buttonDetail.setOnClickListener {  // Tambah event klik untuk detail
+                onDetailClick(makanan)
             }
         }
     }

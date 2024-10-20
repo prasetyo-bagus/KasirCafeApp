@@ -9,6 +9,7 @@ import com.example.kasircafeapp.R
 import com.example.kasircafeapp.data.entity.Makanan
 import com.example.kasircafeapp.databinding.ActivityMakananBinding
 import com.example.kasircafeapp.ui.adapter.MakananAdapter
+import com.example.kasircafeapp.ui.view.fragment.DetailMakananFragment
 import com.example.kasircafeapp.ui.viewmodel.MakananViewModel
 
 class MakananActivity : AppCompatActivity() {
@@ -32,7 +33,7 @@ class MakananActivity : AppCompatActivity() {
     private fun setupToolbar() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.apply {
-            title = "Makanan"
+            title = "KelolaMakanan"
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
         }
@@ -44,7 +45,8 @@ class MakananActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         val adapter = MakananAdapter(
             onDeleteClick = { makanan -> makananViewModel.delete(makanan) },
-            onEditClick = { makanan -> showTambahMakananFragment(makanan) }
+            onEditClick = { makanan -> showTambahMakananFragment(makanan) },
+            onDetailClick = { makanan -> showDetailMakananFragment(makanan) }
         )
         binding.recyclerViewMakanan.adapter = adapter
         binding.recyclerViewMakanan.layoutManager = LinearLayoutManager(this)
@@ -65,6 +67,26 @@ class MakananActivity : AppCompatActivity() {
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
 
+        binding.recyclerViewMakanan.visibility = View.GONE
+        binding.fabAddMakanan.visibility = View.GONE
+        binding.fragmentContainer.visibility = View.VISIBLE
+    }
+
+    private fun showDetailMakananFragment(makanan: Makanan) {
+        val fragment = DetailMakananFragment().apply {
+            arguments = Bundle().apply {
+                putString("nama", makanan.nama)
+                putDouble("harga", makanan.harga)
+                putString("deskripsi", makanan.deskripsi)
+                putString("kategori", makanan.kategori)
+            }
+        }
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragmentContainer, fragment)
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
+
+        // Sembunyikan RecyclerView dan FloatingActionButton
         binding.recyclerViewMakanan.visibility = View.GONE
         binding.fabAddMakanan.visibility = View.GONE
         binding.fragmentContainer.visibility = View.VISIBLE
