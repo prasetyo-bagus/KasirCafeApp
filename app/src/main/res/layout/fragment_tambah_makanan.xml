@@ -61,10 +61,10 @@
 
                 <TextView
                     android:id="@+id/tvTitle"
-                    android:layout_width="0dp"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:gravity="start|center_vertical"
-                    android:text="Tambah/Edit Makanan"
+                    android:gravity="top|center_horizontal"
+                    android:text="Form Makanan"
                     android:textStyle="bold"
                     android:textSize="26sp"
                     app:layout_constraintBottom_toTopOf="@+id/editTextNama"
@@ -125,75 +125,122 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.22" />
+                    app:layout_constraintGuide_percent="0.15" />
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/ghcf2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.32" />
+                    app:layout_constraintGuide_percent="0.28" />
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/ghcf3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.42" />
+                    app:layout_constraintGuide_percent="0.41" />
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/ghcf4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.52" />
+                    app:layout_constraintGuide_percent="0.64" />
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/ghcf5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.62" />
+                    app:layout_constraintGuide_percent="0.77" />
 
-                <EditText
-                    android:id="@+id/editTextNama"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutNama"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="Nama Makanan"
                     app:layout_constraintBottom_toTopOf="@+id/ghcf2"
                     app:layout_constraintEnd_toStartOf="@+id/gvc4"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/gvc1"
-                    app:layout_constraintTop_toTopOf="@+id/ghcf1" />
+                    app:layout_constraintTop_toTopOf="@+id/ghcf1"
+                    android:textColorHint="#BCB0AD"
+                    app:boxCornerRadiusBottomStart="16dp"
+                    app:boxCornerRadiusTopEnd="16dp"
+                    app:boxCornerRadiusBottomEnd="16dp"
+                    app:boxCornerRadiusTopStart="16dp">
 
-                <EditText
-                    android:id="@+id/editTextDeskripsi"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextNama"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Nama Makanan" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutDeskripsi"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:hint="Deskripsi Makanan"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
                     app:layout_constraintBottom_toTopOf="@+id/ghcf4"
                     app:layout_constraintEnd_toStartOf="@+id/gvc4"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/gvc1"
-                    app:layout_constraintTop_toTopOf="@+id/ghcf3" />
+                    app:layout_constraintTop_toTopOf="@+id/ghcf3"
+                    android:textColorHint="#BCB0AD"
+                    app:boxCornerRadiusBottomStart="16dp"
+                    app:boxCornerRadiusTopEnd="16dp"
+                    app:boxCornerRadiusBottomEnd="16dp"
+                    app:boxCornerRadiusTopStart="16dp">
 
-                <EditText
-                    android:id="@+id/editTextKategori"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextDeskripsi"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Deskripsi Makanan" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutHarga"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="Kategori Makanan"
-                    app:layout_constraintBottom_toTopOf="@+id/ghcf5"
-                    app:layout_constraintEnd_toStartOf="@+id/gvc4"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/gvc1"
-                    app:layout_constraintTop_toTopOf="@+id/ghcf4" />
-
-                <EditText
-                    android:id="@+id/editTextHarga"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:hint="Harga Makanan"
                     app:layout_constraintBottom_toTopOf="@+id/ghcf3"
                     app:layout_constraintEnd_toStartOf="@+id/gvc4"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/gvc1"
-                    app:layout_constraintTop_toTopOf="@+id/ghcf2" />
+                    app:layout_constraintTop_toTopOf="@+id/ghcf2"
+                    android:textColorHint="#BCB0AD"
+                    app:boxCornerRadiusBottomStart="16dp"
+                    app:boxCornerRadiusTopEnd="16dp"
+                    app:boxCornerRadiusBottomEnd="16dp"
+                    app:boxCornerRadiusTopStart="16dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextHarga"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Harga Makanan" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutKategori"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toTopOf="@+id/ghcf5"
+                    app:layout_constraintEnd_toStartOf="@+id/gvc4"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/gvc1"
+                    app:layout_constraintTop_toTopOf="@+id/ghcf4"
+                    android:textColorHint="#BCB0AD"
+                    app:boxCornerRadiusBottomStart="16dp"
+                    app:boxCornerRadiusTopEnd="16dp"
+                    app:boxCornerRadiusBottomEnd="16dp"
+                    app:boxCornerRadiusTopStart="16dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextKategori"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Kategori Makanan" />
+                </com.google.android.material.textfield.TextInputLayout>
+
 
                 <Button
                     android:id="@+id/buttonBatal"
