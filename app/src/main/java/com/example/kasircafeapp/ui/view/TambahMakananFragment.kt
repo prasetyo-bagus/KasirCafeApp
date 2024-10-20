@@ -57,6 +57,10 @@ class TambahMakananFragment : Fragment() {
             }
             (activity as MakananActivity).hideTambahMakananFragment()
         }
+        binding.buttonBatal.setOnClickListener {
+            // Menghilangkan fragment dan kembali ke MakananActivity
+            (activity as MakananActivity).hideTambahMakananFragment()
+        }
     }
 
     override fun onDestroyView() {
