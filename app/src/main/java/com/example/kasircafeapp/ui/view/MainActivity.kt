@@ -16,11 +16,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        binding.buttonTransaksi.setOnClickListener{
-//            val intent = Intent(this, TransaksiActivity::class.java)
-//            startActivity(intent)
-//        }
-
         binding.buttonMakanan.setOnClickListener{
             val intent = Intent(this, MakananActivity::class.java)
             startActivity(intent)
