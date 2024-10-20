@@ -23,7 +23,7 @@ class MinumanActivity : AppCompatActivity(), MinumanAdapter.OnItemClickListener 
 
         setSupportActionBar(binding.toolbar)
         supportActionBar?.apply {
-            title = "Minuman"
+            title = "Kelola Minuman"
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
         }
