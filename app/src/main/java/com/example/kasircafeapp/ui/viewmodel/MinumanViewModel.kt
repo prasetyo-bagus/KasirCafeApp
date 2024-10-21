@@ -26,4 +26,7 @@ class MinumanViewModel (application: Application) : AndroidViewModel(application
         minumanDao.delete_minuman(minuman)
     }
 
+    fun update(minuman: Minuman) = viewModelScope.launch {
+        minumanDao.update_minuman(minuman)
+    }
 }
