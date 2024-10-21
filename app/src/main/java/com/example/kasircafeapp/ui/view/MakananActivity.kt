@@ -33,7 +33,7 @@ class MakananActivity : AppCompatActivity() {
     private fun setupToolbar() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.apply {
-            title = "KelolaMakanan"
+            title = "Kelola Makanan"
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
         }
@@ -86,7 +86,6 @@ class MakananActivity : AppCompatActivity() {
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
 
-        // Sembunyikan RecyclerView dan FloatingActionButton
         binding.recyclerViewMakanan.visibility = View.GONE
         binding.fabAddMakanan.visibility = View.GONE
         binding.fragmentContainer.visibility = View.VISIBLE

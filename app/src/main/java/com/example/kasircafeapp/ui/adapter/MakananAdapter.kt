@@ -29,7 +29,7 @@ class MakananAdapter(
                 onEditClick(makanan)
             }
 
-            binding.buttonDetail.setOnClickListener {  // Tambah event klik untuk detail
+            binding.buttonDetail.setOnClickListener {
                 onDetailClick(makanan)
             }
         }
