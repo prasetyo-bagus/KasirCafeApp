@@ -17,6 +17,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArguments ["clearPackageData"] = "true"
     }
 
     buildTypes {
@@ -72,8 +73,14 @@ dependencies {
 
     // optional - Test helpers
     testImplementation(libs.androidx.room.testing)
+    androidTestImplementation(libs.androidx.core.testing)
+    androidTestImplementation(libs.androidx.room.testing)
+
 
     // testing database
     androidTestImplementation(libs.androidx.junit)
+    testImplementation(libs.junit.v412)
+    androidTestImplementation(libs.androidx.junit.v115)
+    androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation (libs.kotlinx.coroutines.test)
 }
