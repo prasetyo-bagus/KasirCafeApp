@@ -22,9 +22,9 @@ class MinumanAdapter(private val listener: OnItemClickListener) : ListAdapter<Mi
     inner class MinumanViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val tvNamaMinuman: TextView = itemView.findViewById(R.id.outputnamaminuman)
         private val tvHargaMinuman: TextView = itemView.findViewById(R.id.outputhargaminuman)
-        private val tvKategoriMinuman: TextView = itemView.findViewById(R.id.textView)
+        private val tvKategoriMinuman: TextView = itemView.findViewById(R.id.outputkategoriminuman)
 
-        fun bind(minuman: Minuman) {
+        fun bind(minuman : Minuman) {
             tvNamaMinuman.text = minuman.nama_minuman
             tvHargaMinuman.text = minuman.harga_minuman.toString()
             tvKategoriMinuman.text = minuman.kategori_minuman
@@ -51,7 +51,6 @@ class MinumanAdapter(private val listener: OnItemClickListener) : ListAdapter<Mi
     fun getSelectedMinuman(): Minuman? {
         return selectedMinuman
     }
-
 
     class MinumanDiffCallback : DiffUtil.ItemCallback<Minuman>() {
         override fun areItemsTheSame(oldItem: Minuman, newItem: Minuman): Boolean {
