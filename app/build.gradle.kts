@@ -77,7 +77,7 @@ dependencies {
     androidTestImplementation(libs.androidx.room.testing)
 
 
-    // testing database
+    // Database Testing
     androidTestImplementation(libs.androidx.junit)
     testImplementation(libs.junit.v412)
     androidTestImplementation(libs.androidx.junit.v115)

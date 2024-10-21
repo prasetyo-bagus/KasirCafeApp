@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kasircafeapp.R
 import com.example.kasircafeapp.data.entity.Minuman
 
-class MinumanAdapter(private val listener: OnItemClickListener) : ListAdapter<Minuman, MinumanAdapter.MinumanViewHolder>(MinumanDiffCallback()) {
+class MinumanAdapter(private val listener: OnItemClickListener) : ListAdapter<Minuman, MinumanAdapter.MinumanViewHolder>(MinumanCallbak()) {
 
     private var selectedMinuman: Minuman? = null
 
@@ -52,8 +52,7 @@ class MinumanAdapter(private val listener: OnItemClickListener) : ListAdapter<Mi
         return selectedMinuman
     }
 
-
-    class MinumanDiffCallback : DiffUtil.ItemCallback<Minuman>() {
+    class MinumanCallbak : DiffUtil.ItemCallback<Minuman>() {
         override fun areItemsTheSame(oldItem: Minuman, newItem: Minuman): Boolean {
             return oldItem.id_minuman == newItem.id_minuman
         }
