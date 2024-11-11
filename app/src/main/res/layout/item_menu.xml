@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    app:cardBackgroundColor="@color/gojek_blue"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true"
+    android:background="#FFFFFF">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.95" />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95" />
+
+        <TextView
+            android:id="@+id/tvNamaMakanan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Makanan"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/guideline_top"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+            app:layout_constraintLeft_toRightOf="@id/guideline_left"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left"/>
+
+        <TextView
+            android:id="@+id/tvNamaMinuman"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Minuman"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/tvNamaMakanan"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+            app:layout_constraintLeft_toRightOf="@id/guideline_left"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left"/>
+
+        <TextView
+            android:id="@+id/tvJumlah"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jumlah"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/tvNamaMinuman"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+            app:layout_constraintLeft_toRightOf="@id/guideline_left"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left" />
+
+        <TextView
+            android:id="@+id/tvTotalHarga"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Harga"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/tvJumlah"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+            app:layout_constraintLeft_toRightOf="@id/guideline_left"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

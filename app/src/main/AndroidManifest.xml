@@ -26,9 +26,6 @@
             android:name=".ui.view.MakananActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.view.TransaksiActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.view.MainActivity"
             android:exported="true">
             <intent-filter>

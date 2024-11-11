@@ -37,38 +37,6 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.95" />
 
-
-    <!--    <androidx.cardview.widget.CardView-->
-    <!--        android:id="@+id/buttonTransaksi"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="120dp"-->
-    <!--        app:cardBackgroundColor="@color/gojek_green"-->
-    <!--        app:cardCornerRadius="8dp"-->
-    <!--        app:cardElevation="4dp"-->
-    <!--        app:cardUseCompatPadding="true"-->
-    <!--        app:layout_constraintEnd_toStartOf="@+id/guideline_right"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/guideline_left"-->
-    <!--        app:layout_constraintTop_toTopOf="@+id/guideline_top">-->
-
-    <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent">-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:text="transaksi"-->
-    <!--                android:textSize="32dp"-->
-    <!--                android:textAllCaps="true"-->
-    <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--                app:layout_constraintEnd_toEndOf="parent"-->
-    <!--                app:layout_constraintStart_toStartOf="parent"-->
-    <!--                app:layout_constraintTop_toTopOf="parent" />-->
-
-    <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-    <!--    </androidx.cardview.widget.CardView>-->
-
     <TextView
         android:id="@+id/dasboard_app"
         android:layout_width="wrap_content"
@@ -108,7 +76,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="makanan"
+                android:text="menu"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="32dp"

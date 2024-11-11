@@ -46,7 +46,7 @@ class MinumanActivity : AppCompatActivity(), MinumanAdapter.OnItemClickListener 
             val kategoriMinuman = binding.inputtextkategoriminuman.editText?.text.toString()
 
             if (namaMinuman.isNotEmpty() && hargaMinuman != null) {
-                val minuman = Minuman(nama_minuman = namaMinuman, harga_minuman = hargaMinuman, kategori_minuman = kategoriMinuman)
+                val minuman = Minuman(nama_minuman = namaMinuman, harga_minuman = hargaMinuman.toDouble(), kategori_minuman = kategoriMinuman)
                 minumanViewModel.insert(minuman)
                 clearInputs()
             }
@@ -64,11 +64,11 @@ class MinumanActivity : AppCompatActivity(), MinumanAdapter.OnItemClickListener 
             val selectedMinuman = minumanAdapter.getSelectedMinuman()
             if (selectedMinuman != null) {
                 val namaMinuman = binding.inputtextminuman.editText?.text.toString()
-                val hargaMinuman = binding.inputtextharga.editText?.text.toString().toIntOrNull()
+                val hargaMinuman = binding.inputtextharga.editText?.text.toString().toDoubleOrNull()
                 val kategoriMinuman = binding.inputtextkategoriminuman.editText?.text.toString()
 
                 if (namaMinuman.isNotEmpty() && hargaMinuman != null) {
-                    val updatedMinuman = selectedMinuman.copy(nama_minuman = namaMinuman, harga_minuman = hargaMinuman, kategori_minuman = kategoriMinuman)
+                    val updatedMinuman = selectedMinuman.copy(nama_minuman = namaMinuman, harga_minuman = hargaMinuman.toDouble(), kategori_minuman = kategoriMinuman)
                     minumanViewModel.insert(updatedMinuman)
                     clearInputs()
                 }
