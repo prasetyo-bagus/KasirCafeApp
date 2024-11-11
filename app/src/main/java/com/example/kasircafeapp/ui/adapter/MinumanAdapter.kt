@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kasircafeapp.R
 import com.example.kasircafeapp.data.entity.Minuman
 
-class MinumanAdapter(private val listener: OnItemClickListener) : ListAdapter<Minuman, MinumanAdapter.MinumanViewHolder>(MinumanCallbak()) {
+// Adapter untuk daftar minuman
+class MinumanAdapter(private val listener: OnItemClickListener) : ListAdapter<Minuman, MinumanAdapter.MinumanViewHolder>(MinumanDiffCallback()) {
 
     private var selectedMinuman: Minuman? = null
-
 
     interface OnItemClickListener {
         fun onItemClick(minuman: Minuman)
@@ -24,7 +24,7 @@ class MinumanAdapter(private val listener: OnItemClickListener) : ListAdapter<Mi
         private val tvHargaMinuman: TextView = itemView.findViewById(R.id.outputhargaminuman)
         private val tvKategoriMinuman: TextView = itemView.findViewById(R.id.outputkategoriminuman)
 
-        fun bind(minuman : Minuman) {
+        fun bind(minuman: Minuman) {
             tvNamaMinuman.text = minuman.nama_minuman
             tvHargaMinuman.text = minuman.harga_minuman.toString()
             tvKategoriMinuman.text = minuman.kategori_minuman
@@ -46,12 +46,9 @@ class MinumanAdapter(private val listener: OnItemClickListener) : ListAdapter<Mi
         holder.bind(getItem(position))
     }
 
-    override fun getItemCount(): Int = currentList.size
-
     fun getSelectedMinuman(): Minuman? {
         return selectedMinuman
     }
-
 
     class MinumanDiffCallback : DiffUtil.ItemCallback<Minuman>() {
         override fun areItemsTheSame(oldItem: Minuman, newItem: Minuman): Boolean {
@@ -59,6 +56,33 @@ class MinumanAdapter(private val listener: OnItemClickListener) : ListAdapter<Mi
         }
 
         override fun areContentsTheSame(oldItem: Minuman, newItem: Minuman): Boolean {
+            return oldItem == newItem
+        }
+    }
+}
+
+
+class NumberListAdapter : ListAdapter<Int, NumberListAdapter.IntViewHolder>(RowItemDiffCallback()) {
+
+    class IntViewHolder(val row: View) : RecyclerView.ViewHolder(row) {
+        val textView: TextView = row.findViewById(R.id.number)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IntViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.style_minuman, parent, false)
+        return IntViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: IntViewHolder, position: Int) {
+        holder.textView.text = getItem(position).toString()
+    }
+
+    class RowItemDiffCallback : DiffUtil.ItemCallback<Int>() {
+        override fun areItemsTheSame(oldItem: Int, newItem: Int): Boolean {
+            return oldItem == newItem
+        }
+
+        override fun areContentsTheSame(oldItem: Int, newItem: Int): Boolean {
             return oldItem == newItem
         }
     }
