@@ -77,6 +77,13 @@ dependencies {
     androidTestImplementation(libs.androidx.room.testing)
 
 
+    // Untuk pengujian LiveData
+    androidTestImplementation ("androidx.arch.core:core-testing:2.1.0")
+
+    // Untuk Coroutine Testing
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0")
+
+    // testing database
     // Database Testing
     androidTestImplementation(libs.androidx.junit)
     testImplementation(libs.junit.v412)

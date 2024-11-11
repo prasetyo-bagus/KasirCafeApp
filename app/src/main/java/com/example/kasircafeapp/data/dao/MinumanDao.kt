@@ -13,13 +13,13 @@ import com.example.kasircafeapp.data.entity.Minuman
 interface MinumanDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert_minuman(minuman: Minuman)
+    suspend fun insert_minuman(minuman : Minuman)
 
     @Update
-    suspend fun update_minuman(minuman: Minuman)
+    suspend fun update_minuman(minuman : Minuman)
 
     @Delete
-    suspend fun delete_minuman(minuman: Minuman)
+    suspend fun delete_minuman(minuman : Minuman)
 
     @Query("SELECT * FROM minuman_table")
     fun getAllMinuman() : LiveData<List<Minuman>>
