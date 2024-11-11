@@ -73,6 +73,9 @@ dependencies {
 
     // optional - Test helpers
     testImplementation(libs.androidx.room.testing)
+    androidTestImplementation(libs.androidx.core.testing)
+    androidTestImplementation(libs.androidx.room.testing)
+
 
     // Untuk pengujian LiveData
     androidTestImplementation ("androidx.arch.core:core-testing:2.1.0")
@@ -82,6 +85,9 @@ dependencies {
 
     // testing database
     androidTestImplementation(libs.androidx.junit)
+    testImplementation(libs.junit.v412)
+    androidTestImplementation(libs.androidx.junit.v115)
+    androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation (libs.kotlinx.coroutines.test)
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
