@@ -76,7 +76,7 @@ class MakananActivity : AppCompatActivity() {
         val fragment = DetailMakananFragment().apply {
             arguments = Bundle().apply {
                 putString("nama", makanan.nama)
-                putDouble("harga", makanan.harga)
+                putDouble("harga", makanan.harga.toDouble())
                 putString("deskripsi", makanan.deskripsi)
                 putString("kategori", makanan.kategori)
             }

@@ -6,17 +6,20 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.kasircafeapp.data.dao.AdminDao
 import com.example.kasircafeapp.data.dao.MakananDao
+import com.example.kasircafeapp.data.dao.MenuDao
 import com.example.kasircafeapp.data.dao.MinumanDao
 import com.example.kasircafeapp.data.entity.Admin
 import com.example.kasircafeapp.data.entity.Makanan
+import com.example.kasircafeapp.data.entity.Menu
 import com.example.kasircafeapp.data.entity.Minuman
 
-@Database(entities = [Makanan::class, Minuman::class, Admin::class], version = 2, exportSchema = false)
+@Database(entities = [Menu::class,Makanan::class, Minuman::class, Admin::class], version = 1, exportSchema = false)
 abstract class CafeDatabase : RoomDatabase(){
 
     abstract fun makananDao(): MakananDao
     abstract fun minumanDao(): MinumanDao
     abstract fun adminDao(): AdminDao
+    abstract fun menuDao(): MenuDao
 
     companion object{
         @Volatile
