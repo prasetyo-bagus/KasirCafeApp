@@ -84,12 +84,10 @@ dependencies {
     testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0")
 
     // testing database
+    // Database Testing
     androidTestImplementation(libs.androidx.junit)
     testImplementation(libs.junit.v412)
     androidTestImplementation(libs.androidx.junit.v115)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation (libs.kotlinx.coroutines.test)
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    testImplementation ("junit:junit:4.12")
 }
