@@ -9,11 +9,17 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kasircafeapp.R
 import com.example.kasircafeapp.data.entity.Minuman
+import com.example.kasircafeapp.databinding.ItemMenuMakananBinding
+import com.example.kasircafeapp.databinding.ItemMenuMinumanBinding
+import java.text.NumberFormat
+import java.util.Locale
+import kotlin.math.min
 
 // Adapter untuk daftar minuman
-class MinumanAdapter(private val listener: OnItemClickListener) : ListAdapter<Minuman, MinumanAdapter.MinumanViewHolder>(MinumanDiffCallback()) {
+class MinumanAdapter(private val listener: OnItemClickListener) : ListAdapter<Minuman, RecyclerView.ViewHolder>(MinumanDiffCallback()) {
 
     private var selectedMinuman: Minuman? = null
+    var useLayoutMenuMinuman: Boolean = false
 
     interface OnItemClickListener {
         fun onItemClick(minuman: Minuman)
@@ -37,13 +43,47 @@ class MinumanAdapter(private val listener: OnItemClickListener) : ListAdapter<Mi
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MinumanViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.style_minuman, parent, false)
-        return MinumanViewHolder(view)
+    // ViewHolder untuk layout menu Minuman
+    inner class MenuMinumanViewHolder(private val binding: ItemMenuMinumanBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+            fun bind(minuman: Minuman) {
+                binding.ivMenuMinuman.setImageResource(R.drawable.minuman_cover)
+                binding.tvMenuNamaMinuman.text = minuman.nama_minuman
+//                binding.tvMenuHargaMinuman.text = String.format("Rp. %.2f", minuman.harga_minuman)
+                val numberFormat = NumberFormat.getCurrencyInstance(Locale("id", "ID"))
+                numberFormat.maximumFractionDigits = 2
+                binding.tvMenuHargaMinuman.text = numberFormat.format(minuman.harga_minuman)
+            }
+        }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return if (useLayoutMenuMinuman) {
+            val binding = ItemMenuMinumanBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+            MenuMinumanViewHolder(binding)
+        } else {
+            val view = LayoutInflater.from(parent.context).inflate(
+                R.layout.style_minuman,
+                parent,
+                false
+            )
+            MinumanViewHolder(view)
+        }
     }
 
-    override fun onBindViewHolder(holder: MinumanViewHolder, position: Int) {
-        holder.bind(getItem(position))
+//    override fun onBindViewHolder(holder: MinumanViewHolder, position: Int) {
+//        holder.bind(getItem(position))
+//    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val minuman = getItem(position)
+        when (holder) {
+            is MinumanViewHolder -> holder.bind(minuman)
+            is MenuMinumanViewHolder -> holder.bind(minuman)
+        }
     }
 
     fun getSelectedMinuman(): Minuman? {

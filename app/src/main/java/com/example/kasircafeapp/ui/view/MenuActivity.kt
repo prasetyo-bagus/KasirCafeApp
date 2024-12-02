@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kasircafeapp.R
 import com.example.kasircafeapp.data.entity.Menu
 import com.example.kasircafeapp.data.entity.Minuman
+import com.example.kasircafeapp.databinding.ActivityMenuBinding
+import com.example.kasircafeapp.databinding.ItemMenuMinumanBinding
 import com.example.kasircafeapp.ui.adapter.MakananAdapter
 import com.example.kasircafeapp.ui.adapter.MenuAdapter
 import com.example.kasircafeapp.ui.adapter.MinumanAdapter
@@ -20,19 +22,27 @@ import com.example.kasircafeapp.ui.viewmodel.MinumanViewModel
 
 class MenuActivity : AppCompatActivity() {
 
-//    private val menuViewModel: MenuViewModel by viewModels()
-//    private lateinit var adapter: MenuAdapter
-
-
+    private lateinit var binding: ActivityMenuBinding
     private lateinit var minumanViewModel: MinumanViewModel
     private lateinit var makananViewModel: MakananViewModel
-
     private lateinit var makananAdapter: MakananAdapter
     private lateinit var minumanAdapter: MinumanAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_menu)
+        binding = ActivityMenuBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.apply {
+            title = "Menu"
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
+        }
+
+        binding.toolbar.setNavigationOnClickListener {
+            finish()
+        }
 
         minumanViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(MinumanViewModel::class.java)
         makananViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(MakananViewModel::class.java)
@@ -53,7 +63,9 @@ class MenuActivity : AppCompatActivity() {
             override fun onItemClick(minuman: Minuman) {
                 TODO("Not yet implemented")
             }
-        })
+        }).apply {
+            useLayoutMenuMinuman = true
+        }
         recyclerViewMinuman.adapter = minumanAdapter
         recyclerViewMinuman.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 

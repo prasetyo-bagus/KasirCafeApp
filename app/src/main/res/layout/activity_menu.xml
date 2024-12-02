@@ -53,17 +53,13 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.95" />
 
-        <TextView
-            android:id="@+id/dasboard_app"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="MENU"
-            android:textAllCaps="true"
-            android:textSize="40dp"
-            android:textStyle="bold"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
             app:layout_constraintBottom_toTopOf="@id/guideline_top"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-            app:layout_constraintStart_toStartOf="@+id/guideline_left"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     <!--    <androidx.recyclerview.widget.RecyclerView-->
@@ -116,7 +112,7 @@
             app:layout_constraintStart_toStartOf="@id/guideline_left"
             app:layout_constraintEnd_toStartOf="@id/guideline_right"
             app:layout_constraintBottom_toTopOf="@id/guideline_bottom"
-            tools:listitem="@layout/style_minuman"/>
+            tools:listitem="@layout/item_menu_minuman"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

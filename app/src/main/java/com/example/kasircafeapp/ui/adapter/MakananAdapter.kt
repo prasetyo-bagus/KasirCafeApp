@@ -7,6 +7,8 @@ import com.example.kasircafeapp.R
 import com.example.kasircafeapp.data.entity.Makanan
 import com.example.kasircafeapp.databinding.ItemMakananBinding
 import com.example.kasircafeapp.databinding.ItemMenuMakananBinding
+import java.text.NumberFormat
+import java.util.Locale
 
 class MakananAdapter(
     private val onDeleteClick: (Makanan) -> Unit = {},
@@ -38,7 +40,10 @@ class MakananAdapter(
         fun bind(makanan: Makanan) {
             binding.ivMenuMakanan.setImageResource(R.drawable.food_cover)
             binding.tvMenuNamaMakanan.text = makanan.nama
-            binding.tvMenuHargaMakanan.text = makanan.harga.toString()
+//            binding.tvMenuHargaMakanan.text = String.format("Rp. %.2f", makanan.harga)
+            val numberFormat = NumberFormat.getCurrencyInstance(Locale("id", "ID"))
+            numberFormat.maximumFractionDigits = 2
+            binding.tvMenuHargaMakanan.text = numberFormat.format(makanan.harga)
         }
     }
 

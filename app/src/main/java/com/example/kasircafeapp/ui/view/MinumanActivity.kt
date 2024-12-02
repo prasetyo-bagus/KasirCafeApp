@@ -1,6 +1,7 @@
 package com.example.kasircafeapp.ui.view
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,7 @@ class MinumanActivity : AppCompatActivity(), MinumanAdapter.OnItemClickListener 
     private lateinit var binding: ActivityMinumanBinding
     private val minumanViewModel: MinumanViewModel by viewModels()
     private lateinit var minumanAdapter: MinumanAdapter
+    private var useLayoutMenuMinuman: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,8 +57,17 @@ class MinumanActivity : AppCompatActivity(), MinumanAdapter.OnItemClickListener 
         binding.floatingbuttondelete.setOnClickListener {
             val selectedMinuman = minumanAdapter.getSelectedMinuman()
             if (selectedMinuman != null) {
-                minumanViewModel.delete(selectedMinuman)
-                clearInputs()
+                AlertDialog.Builder(this).apply {
+                    setTitle("Hapus Minuman")
+                    setMessage("Anda yakin ingin menghapus minuman ini?")
+                    setPositiveButton("Ya") { _, _ ->
+                        minumanViewModel.delete(selectedMinuman)
+                        clearInputs()
+                    }
+                    setNegativeButton("Batal", null)
+                }.show()
+            } else {
+                showToast("Pilih minuman yang ingin dihapus")
             }
         }
 
@@ -68,12 +79,24 @@ class MinumanActivity : AppCompatActivity(), MinumanAdapter.OnItemClickListener 
                 val kategoriMinuman = binding.inputtextkategoriminuman.editText?.text.toString()
 
                 if (namaMinuman.isNotEmpty() && hargaMinuman != null) {
-                    val updatedMinuman = selectedMinuman.copy(nama_minuman = namaMinuman, harga_minuman = hargaMinuman.toDouble(), kategori_minuman = kategoriMinuman)
-                    minumanViewModel.insert(updatedMinuman)
+                    val updatedMinuman = selectedMinuman.copy(
+                        nama_minuman = namaMinuman,
+                        harga_minuman = hargaMinuman,
+                        kategori_minuman = kategoriMinuman
+                    )
+                    minumanViewModel.update(updatedMinuman)
                     clearInputs()
+                } else {
+                    showToast("Lengkapi data minuman")
                 }
+            } else {
+                showToast("Pilih minuman yang ingin diedit")
             }
         }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onItemClick(minuman: Minuman) {
