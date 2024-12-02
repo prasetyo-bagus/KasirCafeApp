@@ -46,7 +46,8 @@ class MakananActivity : AppCompatActivity() {
         val adapter = MakananAdapter(
             onDeleteClick = { makanan -> makananViewModel.delete(makanan) },
             onEditClick = { makanan -> showTambahMakananFragment(makanan) },
-            onDetailClick = { makanan -> showDetailMakananFragment(makanan) }
+            onDetailClick = { makanan -> showDetailMakananFragment(makanan) },
+            useLayoutMenuMakanan = false
         )
         binding.recyclerViewMakanan.adapter = adapter
         binding.recyclerViewMakanan.layoutManager = LinearLayoutManager(this)
