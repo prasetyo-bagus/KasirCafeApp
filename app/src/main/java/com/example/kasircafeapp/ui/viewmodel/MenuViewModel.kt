@@ -2,43 +2,37 @@ package com.example.kasircafeapp.ui.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.kasircafeapp.data.dao.TransaksiDao
 import com.example.kasircafeapp.data.database.CafeDatabase
-import com.example.kasircafeapp.data.entity.Makanan
-import com.example.kasircafeapp.data.entity.Menu
-import com.example.kasircafeapp.data.entity.Minuman
-import com.example.kasircafeapp.data.relation.MenuWithDetails
-import com.example.kasircafeapp.data.repository.MenuRepository
+import com.example.kasircafeapp.data.entity.Transaksi
 import kotlinx.coroutines.launch
 
 class MenuViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repository: MenuRepository
-    val allMenuWithDetails: LiveData<List<MenuWithDetails>>
-    val allMakanan: LiveData<List<Makanan>>
-    val allMinuman: LiveData<List<Minuman>>
+    private val transaksiDao: TransaksiDao = CafeDatabase.getDatabase(application).transaksiDao()
 
-    private val _combinedMenuItems = MutableLiveData<List<Any>>()
-    val combinedMenuItems: LiveData<List<Any>> get() = _combinedMenuItems
-
-    init {
-        val menuDao = CafeDatabase.getDatabase(application).menuDao()
-        repository = MenuRepository(menuDao)
-        allMenuWithDetails = repository.allMenuWithDetails
-        allMakanan = repository.allMakanan
-        allMinuman = repository.allMinuman
-    }
-
-    fun insert(menu: Menu) = viewModelScope.launch {
-        repository.insert(menu)
-    }
-
-    fun insertIfNotExists(menu: Menu) = viewModelScope.launch {
-        val existingMenu = repository.getMenuByMakananAndMinuman(menu.makanan_id, menu.minuman_id)
-        if (existingMenu == null) {
-            repository.insert(menu)
+    // Fungsi untuk memasukkan transaksi ke database
+    fun insertTransaksi(transaksi: Transaksi) {
+        viewModelScope.launch {
+            transaksiDao.insertTransaksi(transaksi)
         }
     }
+//
+//    val totalHarga = MutableLiveData<Double>(0.0)
+//    val jumlahPesanan = MutableLiveData<Int>(0)
+//
+//    fun tambahPesanan(harga: Double) {
+//        jumlahPesanan.value = (jumlahPesanan.value ?: 0) + 1
+//        totalHarga.value = (totalHarga.value ?: 0.0) + harga
+//    }
+//
+//    fun kurangPesanan(harga: Double) {
+//        if ((jumlahPesanan.value ?: 0) > 0) {
+//            jumlahPesanan.value = (jumlahPesanan.value ?: 0) - 1
+//            totalHarga.value = (totalHarga.value ?: 0.0) - harga
+//        }
+//    }
 }

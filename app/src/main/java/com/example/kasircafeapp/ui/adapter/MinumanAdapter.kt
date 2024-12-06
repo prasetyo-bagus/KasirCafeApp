@@ -9,20 +9,30 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kasircafeapp.R
 import com.example.kasircafeapp.data.entity.Minuman
-import com.example.kasircafeapp.databinding.ItemMenuMakananBinding
 import com.example.kasircafeapp.databinding.ItemMenuMinumanBinding
 import java.text.NumberFormat
 import java.util.Locale
-import kotlin.math.min
 
 // Adapter untuk daftar minuman
-class MinumanAdapter(private val listener: OnItemClickListener) : ListAdapter<Minuman, RecyclerView.ViewHolder>(MinumanDiffCallback()) {
+class MinumanAdapter(
+    private val listener: OnItemClickListener,
+    private val dataChangedListener: onDataChangedListener
+) : ListAdapter<Minuman, RecyclerView.ViewHolder>(
+    MinumanDiffCallback()
+) {
 
     private var selectedMinuman: Minuman? = null
     var useLayoutMenuMinuman: Boolean = false
+    private val pesananMap = mutableMapOf<Minuman, Pair<Int, Double>>()
+    private val namaMinumanList = mutableListOf<String>()
+
 
     interface OnItemClickListener {
         fun onItemClick(minuman: Minuman)
+    }
+
+    interface onDataChangedListener {
+        fun onDataChanged(totalHarga: Double, jumlahPesanan: Int, namaMinumanList: List<String>)
     }
 
     inner class MinumanViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -32,7 +42,7 @@ class MinumanAdapter(private val listener: OnItemClickListener) : ListAdapter<Mi
 
         fun bind(minuman: Minuman) {
             tvNamaMinuman.text = minuman.nama_minuman
-            tvHargaMinuman.text = minuman.harga_minuman.toString()
+            tvHargaMinuman.text = formatCurrency(minuman.harga_minuman)
             tvKategoriMinuman.text = minuman.kategori_minuman
 
             itemView.setOnClickListener {
@@ -43,18 +53,66 @@ class MinumanAdapter(private val listener: OnItemClickListener) : ListAdapter<Mi
         }
     }
 
+    fun formatCurrency(amount: Double): String {
+        val locale = Locale("id", "ID")
+        val formatter = NumberFormat.getCurrencyInstance(locale)
+        return formatter.format(amount)
+    }
+
+
     // ViewHolder untuk layout menu Minuman
     inner class MenuMinumanViewHolder(private val binding: ItemMenuMinumanBinding) :
         RecyclerView.ViewHolder(binding.root) {
-            fun bind(minuman: Minuman) {
-                binding.ivMenuMinuman.setImageResource(R.drawable.minuman_cover)
-                binding.tvMenuNamaMinuman.text = minuman.nama_minuman
-//                binding.tvMenuHargaMinuman.text = String.format("Rp. %.2f", minuman.harga_minuman)
-                val numberFormat = NumberFormat.getCurrencyInstance(Locale("id", "ID"))
-                numberFormat.maximumFractionDigits = 2
-                binding.tvMenuHargaMinuman.text = numberFormat.format(minuman.harga_minuman)
+
+        private var jumlahPesanan = 0
+        private var totalHarga = 0.0
+
+        fun bind(minuman: Minuman) {
+            binding.ivMenuMinuman.setImageResource(R.drawable.minuman_cover)
+            binding.tvMenuNamaMinuman.text = minuman.nama_minuman
+            binding.tvMenuHargaMinuman.text = formatCurrency(minuman.harga_minuman)
+
+            binding.tvJumlahPesananMinuman.text = "0"
+            jumlahPesanan = 0
+            totalHarga = minuman.harga_minuman
+
+            binding.btnTambahMenuMinuman.setOnClickListener {
+                jumlahPesanan++
+                totalHarga = minuman.harga_minuman * jumlahPesanan
+                pesananMap[minuman] = Pair(jumlahPesanan, totalHarga) // Update pesananMap
+                binding.tvJumlahPesananMinuman.text = jumlahPesanan.toString()
+
+                // Menambahkan nama minuman ke daftar namaMinumanList jika belum ada
+                if (!namaMinumanList.contains(minuman.nama_minuman)) {
+                    namaMinumanList.add(minuman.nama_minuman)
+                }
+
+                // Update total keseluruhan di listener
+                val totalHargaKeseluruhan = pesananMap.values.sumByDouble { it.second }
+                val jumlahPesananKeseluruhan = pesananMap.values.sumOf { it.first }
+                dataChangedListener.onDataChanged(totalHargaKeseluruhan, jumlahPesananKeseluruhan, namaMinumanList)
+            }
+
+            binding.btnKurangMenuMinuman.setOnClickListener {
+                if (jumlahPesanan > 0) {
+                    jumlahPesanan--
+                    totalHarga = minuman.harga_minuman * jumlahPesanan
+                    pesananMap[minuman] = Pair(jumlahPesanan, totalHarga) // Update pesananMap
+                    binding.tvJumlahPesananMinuman.text = jumlahPesanan.toString()
+
+                    // Jika jumlah pesanan menjadi 0, hapus nama minuman dari daftar
+                    if (jumlahPesanan == 0 && namaMinumanList.contains(minuman.nama_minuman)) {
+                        namaMinumanList.remove(minuman.nama_minuman)
+                    }
+
+                    // Update total keseluruhan di listener
+                    val totalHargaKeseluruhan = pesananMap.values.sumByDouble { it.second }
+                    val jumlahPesananKeseluruhan = pesananMap.values.sumOf { it.first }
+                    dataChangedListener.onDataChanged(totalHargaKeseluruhan, jumlahPesananKeseluruhan, namaMinumanList)
+                }
             }
         }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (useLayoutMenuMinuman) {
@@ -74,10 +132,6 @@ class MinumanAdapter(private val listener: OnItemClickListener) : ListAdapter<Mi
         }
     }
 
-//    override fun onBindViewHolder(holder: MinumanViewHolder, position: Int) {
-//        holder.bind(getItem(position))
-//    }
-
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val minuman = getItem(position)
         when (holder) {
@@ -96,33 +150,6 @@ class MinumanAdapter(private val listener: OnItemClickListener) : ListAdapter<Mi
         }
 
         override fun areContentsTheSame(oldItem: Minuman, newItem: Minuman): Boolean {
-            return oldItem == newItem
-        }
-    }
-}
-
-
-class NumberListAdapter : ListAdapter<Int, NumberListAdapter.IntViewHolder>(RowItemDiffCallback()) {
-
-    class IntViewHolder(val row: View) : RecyclerView.ViewHolder(row) {
-        val textView: TextView = row.findViewById(R.id.number)
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IntViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.style_minuman, parent, false)
-        return IntViewHolder(view)
-    }
-
-    override fun onBindViewHolder(holder: IntViewHolder, position: Int) {
-        holder.textView.text = getItem(position).toString()
-    }
-
-    class RowItemDiffCallback : DiffUtil.ItemCallback<Int>() {
-        override fun areItemsTheSame(oldItem: Int, newItem: Int): Boolean {
-            return oldItem == newItem
-        }
-
-        override fun areContentsTheSame(oldItem: Int, newItem: Int): Boolean {
             return oldItem == newItem
         }
     }

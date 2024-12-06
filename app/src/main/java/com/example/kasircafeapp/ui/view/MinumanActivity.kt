@@ -11,7 +11,7 @@ import com.example.kasircafeapp.databinding.ActivityMinumanBinding
 import com.example.kasircafeapp.ui.viewmodel.MinumanViewModel
 import com.example.kasircafeapp.ui.adapter.MinumanAdapter
 
-class MinumanActivity : AppCompatActivity(), MinumanAdapter.OnItemClickListener {
+class MinumanActivity : AppCompatActivity(), MinumanAdapter.OnItemClickListener, MinumanAdapter.onDataChangedListener  {
 
     private lateinit var binding: ActivityMinumanBinding
     private val minumanViewModel: MinumanViewModel by viewModels()
@@ -34,7 +34,7 @@ class MinumanActivity : AppCompatActivity(), MinumanAdapter.OnItemClickListener 
             finish()
         }
 
-        minumanAdapter = MinumanAdapter(this)
+        minumanAdapter = MinumanAdapter(this, this)
         binding.recyclerViewMinuman.adapter = minumanAdapter
         binding.recyclerViewMinuman.layoutManager = LinearLayoutManager(this)
 
@@ -103,6 +103,10 @@ class MinumanActivity : AppCompatActivity(), MinumanAdapter.OnItemClickListener 
         binding.inputtextminuman.editText?.setText(minuman.nama_minuman)
         binding.inputtextharga.editText?.setText(minuman.harga_minuman.toString())
         binding.inputtextkategoriminuman.editText?.setText(minuman.kategori_minuman)
+    }
+
+    override fun onDataChanged(totalHarga: Double, jumlahPesanan: Int, namaMinumanList: List<String>) {
+        // fungsi ini tidak melakukan apapun
     }
 
     private fun clearInputs() {
