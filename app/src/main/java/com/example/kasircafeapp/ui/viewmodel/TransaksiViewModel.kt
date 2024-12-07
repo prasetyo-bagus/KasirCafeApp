@@ -5,8 +5,10 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.example.kasircafeapp.data.database.CafeDatabase
+import com.example.kasircafeapp.data.entity.NamaPesananConverter
 import com.example.kasircafeapp.data.entity.Transaksi
 import com.example.kasircafeapp.data.repository.TransaksiRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class TransaksiViewModel(application: Application) : AndroidViewModel(application) {
@@ -20,7 +22,7 @@ class TransaksiViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     fun insert(transaksi: Transaksi) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.insert(transaksi)
         }
     }

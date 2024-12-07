@@ -77,6 +77,7 @@ class MinumanAdapter(
             totalHarga = minuman.harga_minuman
 
             binding.btnTambahMenuMinuman.setOnClickListener {
+                binding.tvMenuNamaMinuman.text = minuman.nama_minuman
                 jumlahPesanan++
                 totalHarga = minuman.harga_minuman * jumlahPesanan
                 pesananMap[minuman] = Pair(jumlahPesanan, totalHarga) // Update pesananMap

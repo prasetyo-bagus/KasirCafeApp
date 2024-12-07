@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">KasirCafeApp</string>
+    <string name="app_name">Kasir Cafe APP</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="button_add">Button Add</string>
@@ -7,4 +7,12 @@
     <string name="reduced">-</string>
     <string name="_0">0</string>
     <string name="total">Total:</string>
+    <string name="detil_transaksi">Detil Transaksi</string>
+    <string name="tanggal">Tanggal</string>
+    <string name="pesanan">Pesanan</string>
+    <string name="sub_total">Sub Total</string>
+    <string name="bayar">Bayar</string>
+    <string name="total_pesanan">Total Pesanan</string>
+    <string name="kembalian">Kembalian</string>
+    <string name="jumlah_bayar">jumlah bayar</string>
 </resources>

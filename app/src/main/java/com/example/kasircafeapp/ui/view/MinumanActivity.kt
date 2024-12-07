@@ -50,6 +50,7 @@ class MinumanActivity : AppCompatActivity(), MinumanAdapter.OnItemClickListener,
             if (namaMinuman.isNotEmpty() && hargaMinuman != null) {
                 val minuman = Minuman(nama_minuman = namaMinuman, harga_minuman = hargaMinuman.toDouble(), kategori_minuman = kategoriMinuman)
                 minumanViewModel.insert(minuman)
+                showToast("Data berhasil disimpan")
                 clearInputs()
             }
         }
@@ -84,6 +85,7 @@ class MinumanActivity : AppCompatActivity(), MinumanAdapter.OnItemClickListener,
                         harga_minuman = hargaMinuman,
                         kategori_minuman = kategoriMinuman
                     )
+                    showToast("Data Berhasil Di Edit!")
                     minumanViewModel.update(updatedMinuman)
                     clearInputs()
                 } else {

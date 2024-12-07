@@ -1,8 +1,13 @@
     package com.example.kasircafeapp.ui.view
 
     import android.os.Bundle
+    import android.util.Log
+    import android.view.View
+    import android.widget.FrameLayout
+    import android.widget.TextView
     import android.widget.Toast
     import androidx.appcompat.app.AppCompatActivity
+    import androidx.cardview.widget.CardView
     import androidx.lifecycle.ViewModelProvider
     import androidx.recyclerview.widget.LinearLayoutManager
     import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +17,7 @@
     import com.example.kasircafeapp.databinding.ActivityMenuBinding
     import com.example.kasircafeapp.ui.adapter.MakananAdapter
     import com.example.kasircafeapp.ui.adapter.MinumanAdapter
+    import com.example.kasircafeapp.ui.view.fragment.DetilTransaksiFragment
     import com.example.kasircafeapp.ui.viewmodel.MakananViewModel
     import com.example.kasircafeapp.ui.viewmodel.MenuViewModel
     import com.example.kasircafeapp.ui.viewmodel.MinumanViewModel
@@ -31,45 +37,57 @@
 
         private var totalHarga: Double = 0.0
         private var jumlahPesanan = 0
-        private var namaPesananList = mutableListOf<String>()
+        private var namaMinumanList = mutableListOf<String>()
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             binding = ActivityMenuBinding.inflate(layoutInflater)
             setContentView(binding.root)
 
-            binding.btnMenuPembayaran.setOnClickListener{
-                val namaPesanan = this.namaPesananList
-                val kategoriPesanan = "minuman"
-                val jumlahPesanan = this.jumlahPesanan
-                val totalHarga = this.totalHarga
-                val tanggalFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-                val tanggalSekarang = tanggalFormat.format(Date())
+            binding.btnMenuPembayaran.setOnClickListener {
 
-                val transaksi = Transaksi(
-                    namaPesanan = namaPesananList,
-                    kategoriPesanan = kategoriPesanan,
-                    jumlahPesanan = jumlahPesanan,
-                    jumlahBayar = totalHarga,
-                    totalHarga = totalHarga,
-                    tanggal = tanggalSekarang
-                )
+                val jumlahBayarString = binding.etJumlahBayarMenu.editText?.text.toString()
 
-                // Masukkan transaksi ke dalam Room Database
-                menuViewModel.insertTransaksi(transaksi)
+                if (jumlahBayarValid (jumlahBayarString, totalHarga)) {
 
-                // Optional: Tampilkan pesan atau navigasi ke halaman berikutnya
-                // Contoh: Menampilkan pesan
-                Toast.makeText(this, "Pembayaran berhasil!", Toast.LENGTH_SHORT).show()
+                    val jumlahBayar = jumlahBayarString.toDouble()
 
-                // Optional: Navigasi atau lakukan aksi lain setelah pembayaran
-                finish()  // Menutup activity, jika ingin kembali ke halaman sebelumnya
+                    val nominalKembalian = hitungNominalKembalian(jumlahBayar, totalHarga)
 
+                    val transaksi = Transaksi(
+                        namaPesanan = namaMinumanList,
+                        jumlahPesanan = jumlahPesanan,
+                        jumlahBayar = jumlahBayar,
+                        totalHarga = totalHarga,
+                        nominalKembalian = nominalKembalian,
+                        tanggal = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date())
+                    )
+
+                    val bundle = Bundle()
+                    bundle.putParcelable("transaksi", transaksi)
+
+                    val fragment = DetilTransaksiFragment()
+                    fragment.arguments = bundle
+
+                    // Mengganti fragment di activity
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container_transaksi, fragment)
+                        .addToBackStack(null)
+                        .commit()
+
+                    binding.apply {
+                        recyclerViewMenuMakanan.visibility = View.GONE
+                        recyclerViewMenuMinuman.visibility = View.GONE
+                        tvTitleMakanan.visibility = View.GONE
+                        tvTitleMinuman.visibility = View.GONE
+                        cardView.visibility = View.GONE
+                    }
+                    binding.fragmentContainerTransaksi.visibility = View.VISIBLE
+                }
             }
 
             setSupportActionBar(binding.toolbar)
             supportActionBar?.apply {
-                title = "Menu"
                 setDisplayHomeAsUpEnabled(true)
                 setDisplayShowHomeEnabled(true)
             }
@@ -117,11 +135,29 @@
             }
         }
 
+        private fun jumlahBayarValid(jumlahBayarString: String, totalHarga: Double): Boolean {
+            if (jumlahBayarString.isEmpty()) {
+                Toast.makeText(this, "Jumlah bayar tidak boleh kosong", Toast.LENGTH_SHORT).show()
+                return false
+            }
+
+            val jumlahBayar = jumlahBayarString.toDouble()
+
+            if (jumlahBayar < totalHarga) {
+                Toast.makeText(this, "Jumlah bayar kurang dari total harga", Toast.LENGTH_SHORT).show()
+                return false
+            }
+            return true
+        }
+
+        private fun hitungNominalKembalian(jumlahBayar: Double, totalHarga: Double): Double {
+            return jumlahBayar - totalHarga
+        }
+
         override fun onDataChanged(totalHarga: Double, jumlahPesanan: Int, namaMinumanList: List<String>) {
             this.totalHarga = totalHarga
             this.jumlahPesanan = jumlahPesanan
-            this.namaPesananList = namaPesananList.toMutableList()
-
+            this.namaMinumanList = namaMinumanList.toMutableList()
 
             // Update UI untuk menampilkan total harga dan jumlah pesanan
             binding.tvTotalHarga.text = formatCurrency(totalHarga)
