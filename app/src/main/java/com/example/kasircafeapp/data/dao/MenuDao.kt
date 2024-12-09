@@ -9,14 +9,9 @@ import androidx.room.Transaction
 import com.example.kasircafeapp.data.entity.Makanan
 import com.example.kasircafeapp.data.entity.Menu
 import com.example.kasircafeapp.data.entity.Minuman
-import com.example.kasircafeapp.data.relation.MenuWithDetails
 
 @Dao
 interface MenuDao {
-
-    @Transaction
-    @Query("SELECT * FROM menu_table")
-    fun getAllMenuWithDetails(): LiveData<List<MenuWithDetails>>
 
     @Query("SELECT * FROM menu_table WHERE makanan_id = :makananId OR minuman_id = :minumanId")
     suspend fun getMenuByMakananAndMinuman(makananId: Int?, minumanId: Int?): Menu?

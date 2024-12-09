@@ -1,32 +1,62 @@
 package com.example.kasircafeapp.ui.viewmodel
 
 import android.app.Application
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.viewModelScope
-import androidx.room.Delete
-import androidx.room.Insert
-import com.example.kasircafeapp.data.dao.MinumanDao
 import com.example.kasircafeapp.data.database.CafeDatabase
 import com.example.kasircafeapp.data.entity.Minuman
+import com.example.kasircafeapp.data.network.NetworkHelper
+import com.example.kasircafeapp.data.repository.MinumanRepository
+import com.google.firebase.database.FirebaseDatabase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class MinumanViewModel (application: Application) : AndroidViewModel(application){
+class MinumanViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val minumanDao = CafeDatabase.getDatabase(application).minumanDao()
-    val allMinuman: LiveData<List<Minuman>> = minumanDao.getAllMinuman()
+    private val repository: MinumanRepository
+    val allMinuman: LiveData<List<Minuman>>
 
-    fun insert(minuman: Minuman) = viewModelScope.launch {
-        minumanDao.insert_minuman(minuman)
+    init {
+        // Inisialisasi Repository, Database, Network Helper
+        val database = CafeDatabase.getDatabase(application)
+        val networkHelper = NetworkHelper(application)
+        repository = MinumanRepository(
+            minumanDao = database.minumanDao(),
+            firebaseDatabase = FirebaseDatabase.getInstance(),
+            networkHelper = networkHelper
+        )
+        allMinuman = repository.getAllMinuman()
     }
 
-    fun delete(minuman: Minuman) = viewModelScope.launch {
-        minumanDao.delete_minuman(minuman)
+    fun insert(minuman: Minuman) = viewModelScope.launch(Dispatchers.IO) {
+        repository.insertMinuman(minuman)
     }
 
-    fun update(minuman: Minuman) = viewModelScope.launch {
-        minumanDao.update_minuman(minuman)
+    fun update(minuman: Minuman) = viewModelScope.launch(Dispatchers.IO) {
+        repository.updateMinuman(minuman)
+    }
+
+    fun delete(minuman: Minuman) = viewModelScope.launch(Dispatchers.IO) {
+        repository.deleteMinuman(minuman)
+    }
+
+    fun syncMinuman() = viewModelScope.launch(Dispatchers.IO) {
+        repository.syncWithFirebase()
+    }
+
+    fun syncLocalDatabase(minumanList: List<Minuman>) = viewModelScope.launch(Dispatchers.IO) {
+        repository.syncLocalDatabase(minumanList)
+    }
+
+    fun syncUnsyncData() {
+        viewModelScope.launch {
+            repository.syncUnsyncedData()
+            withContext(Dispatchers.Main) {
+                Toast.makeText(getApplication(), "Data offline berhasil disinkronkan!", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }

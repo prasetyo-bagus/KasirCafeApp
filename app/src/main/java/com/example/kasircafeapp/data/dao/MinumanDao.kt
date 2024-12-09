@@ -23,4 +23,10 @@ interface MinumanDao {
 
     @Query("SELECT * FROM minuman_table")
     fun getAllMinuman() : LiveData<List<Minuman>>
+
+    @Query("SELECT * FROM minuman_table WHERE syncronize = 0")
+    suspend fun getUnsyncedMinuman(): List<Minuman>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(minumanList: List<Minuman>)
 }
