@@ -13,6 +13,7 @@ import com.example.kasircafeapp.R
 import com.example.kasircafeapp.data.entity.Transaksi
 import com.example.kasircafeapp.databinding.FragmentDetilTransaksiBinding
 import com.example.kasircafeapp.ui.viewmodel.MenuViewModel
+import com.example.kasircafeapp.ui.viewmodel.TransaksiViewModel
 
 class DetilTransaksiFragment : Fragment() {
 
@@ -52,13 +53,15 @@ class DetilTransaksiFragment : Fragment() {
             binding.tvNominalKembalian.text = "Rp. ${transaksiData.nominalKembalian.toString()}"
 
             binding.btnBayarTransaksi.setOnClickListener {
-                menuViewModel.insertTransaksi(transaksiData)
+                menuViewModel.insert(transaksiData)
 
                 val fragment = LaporanTransaksiFragment()
                 val bundle = Bundle()
                 bundle.putParcelable("transaksi", transaksi)
                 fragment.arguments = bundle
                 Toast.makeText(requireContext(), "Pembayaran Berhasil", Toast.LENGTH_SHORT).show()
+
+                menuViewModel.syncUnsyncedData()
 
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container_transaksi, fragment)

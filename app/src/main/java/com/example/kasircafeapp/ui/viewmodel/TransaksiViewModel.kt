@@ -12,18 +12,18 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class TransaksiViewModel(application: Application) : AndroidViewModel(application) {
-    private val repository: TransaksiRepository
-    val allTransaksi: LiveData<List<Transaksi>>
+//    private val repository: TransaksiRepository
+//    val allTransaksi: LiveData<List<Transaksi>>
 
-    init {
-        val transaksiDao = CafeDatabase.getDatabase(application).transaksiDao()
-        repository = TransaksiRepository(transaksiDao)
-        allTransaksi = repository.getAllTransaksi()
-    }
-
-    fun insert(transaksi: Transaksi) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.insert(transaksi)
-        }
-    }
+//    init {
+//        val transaksiDao = CafeDatabase.getDatabase(application).transaksiDao()
+//        repository = TransaksiRepository(transaksiDao)
+//        allTransaksi = repository.getAllTransaksi()
+//    }
+//
+//    fun insert(transaksi: Transaksi) {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            repository.insert(transaksi)
+//        }
+//    }
 }
