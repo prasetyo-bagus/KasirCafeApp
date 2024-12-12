@@ -18,7 +18,7 @@ import com.example.kasircafeapp.data.entity.NamaPesananConverter
 import com.example.kasircafeapp.data.entity.Transaksi
 
 @Database(entities = [Menu::class,Makanan::class, Minuman::class, Admin::class, Transaksi::class],
-          version = 5,
+          version = 6,
           exportSchema = false)
 @TypeConverters(NamaPesananConverter::class)
 abstract class CafeDatabase : RoomDatabase(){

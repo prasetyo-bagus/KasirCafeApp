@@ -12,13 +12,19 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.kasircafeapp.R
 import com.example.kasircafeapp.data.entity.Transaksi
 import com.example.kasircafeapp.databinding.FragmentDetilTransaksiBinding
+import com.example.kasircafeapp.ui.adapter.MinumanAdapter
 import com.example.kasircafeapp.ui.viewmodel.MenuViewModel
 import com.example.kasircafeapp.ui.viewmodel.TransaksiViewModel
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class DetilTransaksiFragment : Fragment() {
 
     private var _binding: FragmentDetilTransaksiBinding? = null
     private val binding get() = _binding!!
+    private lateinit var minumanAdapter: MinumanAdapter
     private lateinit var menuViewModel: MenuViewModel
     private var transaksi: Transaksi? = null
 
@@ -28,6 +34,33 @@ class DetilTransaksiFragment : Fragment() {
     ): View? {
         _binding = FragmentDetilTransaksiBinding.inflate(inflater, container, false)
         return binding.root
+
+        syncToFirebase()
+        menuViewModel.syncTransaksi()
+    }
+
+    private fun syncToFirebase() {
+        val firebaseRef = FirebaseDatabase.getInstance().getReference("transaksi")
+        firebaseRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val transaksiList = mutableListOf<Transaksi>()
+
+                for (dataSnapshot in snapshot.children) {
+                    val transaksi = dataSnapshot.getValue(Transaksi::class.java)
+                    if (transaksi != null) {
+                        transaksiList.add(transaksi)
+                    }
+                }
+
+//                minumanAdapter.submitList(transaksiList)
+                menuViewModel.syncLocalDatabase(transaksiList)
+                menuViewModel.syncUnsyncedData()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
