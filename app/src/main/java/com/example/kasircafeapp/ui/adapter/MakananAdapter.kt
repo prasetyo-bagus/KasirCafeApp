@@ -39,11 +39,10 @@ class MakananAdapter(
 
         fun bind(makanan: Makanan) {
             binding.ivMenuMakanan.setImageResource(R.drawable.food_cover)
-            binding.tvMenuNamaMakanan.text = makanan.nama
-//            binding.tvMenuHargaMakanan.text = String.format("Rp. %.2f", makanan.harga)
+            binding.tvMenuNamaMakanan.text = makanan.nama_makanan
             val numberFormat = NumberFormat.getCurrencyInstance(Locale("id", "ID"))
             numberFormat.maximumFractionDigits = 2
-            binding.tvMenuHargaMakanan.text = numberFormat.format(makanan.harga)
+            binding.tvMenuHargaMakanan.text = numberFormat.format(makanan.harga_makanan)
         }
     }
 
