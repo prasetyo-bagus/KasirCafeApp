@@ -10,6 +10,10 @@ import com.example.kasircafeapp.data.entity.Minuman
 import com.example.kasircafeapp.databinding.ActivityMinumanBinding
 import com.example.kasircafeapp.ui.viewmodel.MinumanViewModel
 import com.example.kasircafeapp.ui.adapter.MinumanAdapter
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class MinumanActivity : AppCompatActivity(), MinumanAdapter.OnItemClickListener, MinumanAdapter.onDataChangedListener  {
 
@@ -41,6 +45,9 @@ class MinumanActivity : AppCompatActivity(), MinumanAdapter.OnItemClickListener,
         minumanViewModel.allMinuman.observe(this) { minumanList ->
             minumanAdapter.submitList(minumanList)
         }
+
+        syncToFirebase()
+        minumanViewModel.syncMinuman()
 
         binding.floatingbuttonadd.setOnClickListener {
             val namaMinuman = binding.inputtextminuman.editText?.text.toString()
@@ -97,6 +104,30 @@ class MinumanActivity : AppCompatActivity(), MinumanAdapter.OnItemClickListener,
         }
     }
 
+    private fun syncToFirebase() {
+        val firebaseRef = FirebaseDatabase.getInstance().getReference("minuman")
+        firebaseRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val minumanList = mutableListOf<Minuman>()
+
+                for (dataSnapshot in snapshot.children) {
+                    val minuman = dataSnapshot.getValue(Minuman::class.java)
+                    if (minuman != null) {
+                        minumanList.add(minuman)
+                    }
+                }
+
+                minumanAdapter.submitList(minumanList)
+                minumanViewModel.syncLocalDatabase(minumanList)
+                minumanViewModel.syncUnsyncData()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+    }
+
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
@@ -107,13 +138,13 @@ class MinumanActivity : AppCompatActivity(), MinumanAdapter.OnItemClickListener,
         binding.inputtextkategoriminuman.editText?.setText(minuman.kategori_minuman)
     }
 
-    override fun onDataChanged(totalHarga: Double, jumlahPesanan: Int, namaMinumanList: List<String>) {
-        // fungsi ini tidak melakukan apapun
-    }
-
     private fun clearInputs() {
         binding.inputtextminuman.editText?.text?.clear()
         binding.inputtextharga.editText?.text?.clear()
         binding.inputtextkategoriminuman.editText?.text?.clear()
+    }
+
+    override fun onDataChanged(totalHarga: Double, jumlahPesanan: Int, namaMinumanList: List<String>) {
+    // fungsi ini hanya digunakan pada activity menu untuk mengambil total harga
     }
 }

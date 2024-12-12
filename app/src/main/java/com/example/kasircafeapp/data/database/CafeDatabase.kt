@@ -5,7 +5,6 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import androidx.room.migration.Migration
 import com.example.kasircafeapp.data.dao.AdminDao
 import com.example.kasircafeapp.data.dao.MakananDao
 import com.example.kasircafeapp.data.dao.MenuDao
@@ -19,7 +18,7 @@ import com.example.kasircafeapp.data.entity.NamaPesananConverter
 import com.example.kasircafeapp.data.entity.Transaksi
 
 @Database(entities = [Menu::class,Makanan::class, Minuman::class, Admin::class, Transaksi::class],
-          version = 1,
+          version = 4,
           exportSchema = false)
 @TypeConverters(NamaPesananConverter::class)
 abstract class CafeDatabase : RoomDatabase(){
@@ -39,7 +38,7 @@ abstract class CafeDatabase : RoomDatabase(){
                 Room.databaseBuilder(context,
                     CafeDatabase::class.java,
                     "cafe_database")
-                    .fallbackToDestructiveMigrationFrom(1)
+                    .fallbackToDestructiveMigration()
                     .build()
                     .also { Instance = it }
             }
