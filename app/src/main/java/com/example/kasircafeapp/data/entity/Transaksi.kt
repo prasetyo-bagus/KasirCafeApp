@@ -13,11 +13,12 @@ import java.io.Serializable
 @TypeConverters(NamaPesananConverter::class)
 @Parcelize
 data class Transaksi(
-    @PrimaryKey(autoGenerate = true) val id_transaksi: Int = 0,
+    @PrimaryKey() val id_transaksi: String = "",
     val namaPesanan: List<String>,
     val jumlahPesanan: Int,
     val jumlahBayar: Double,
     val totalHarga: Double,
     val nominalKembalian: Double,
-    val tanggal: String
+    val tanggal: String,
+    val synchronize: Boolean = false
 ) : Parcelable
