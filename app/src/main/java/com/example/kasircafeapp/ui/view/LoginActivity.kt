@@ -27,9 +27,7 @@ class LoginActivity : AppCompatActivity() {
                 lifecycleScope.launch {
                     val admin = adminViewModel.getAdmin(username, password)
                     if (admin != null) {
-                        // Login sukses
                         Toast.makeText(this@LoginActivity, "Login Successful", Toast.LENGTH_SHORT).show()
-                        // Navigasi ke MainActivity
                         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                         finish()
                     } else {
@@ -42,7 +40,6 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.tvRegister.setOnClickListener {
-            // Navigasi ke halaman registrasi
             startActivity(Intent(this, AdminActivity::class.java))
         }
     }

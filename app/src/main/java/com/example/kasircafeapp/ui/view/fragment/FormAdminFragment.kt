@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.kasircafeapp.data.entity.Admin
 import com.example.kasircafeapp.databinding.FragmentFormAdminBinding
-import com.example.kasircafeapp.ui.view.AdminActivity
 import com.example.kasircafeapp.ui.viewmodel.AdminViewModel
 
 class FormAdminFragment : Fragment() {
@@ -47,7 +46,6 @@ class FormAdminFragment : Fragment() {
                 adminViewModel.updateAdmin(updatedAdmin)
                 Toast.makeText(requireContext(), "Admin updated", Toast.LENGTH_SHORT).show()
 
-                (activity as AdminActivity).hideEditAdminFragment()
             }
         }
     }
