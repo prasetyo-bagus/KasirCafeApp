@@ -38,7 +38,7 @@
                 android:layout_width="0dp"
                 android:layout_marginTop="13dp"
                 android:layout_height="30dp"
-                android:text="@{makanan.nama}"
+                android:text="@{makanan.nama_makanan}"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/textViewHarga"
@@ -52,7 +52,7 @@
                 android:layout_height="25dp"
                 android:layout_marginBottom="13dp"
                 android:textSize="17sp"
-                android:text='@{"Rp." + String.valueOf(makanan.harga)}'
+                android:text='@{"Rp." + String.valueOf(makanan.harga_makanan)}'
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/gvTiga"
                 app:layout_constraintStart_toStartOf="@+id/gv3"

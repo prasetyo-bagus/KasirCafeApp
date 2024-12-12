@@ -1,6 +1,7 @@
 package com.example.kasircafeapp.ui.view
 
 import android.os.Bundle
+import android.widget.Toast
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,10 @@ import com.example.kasircafeapp.databinding.ActivityMakananBinding
 import com.example.kasircafeapp.ui.adapter.MakananAdapter
 import com.example.kasircafeapp.ui.view.fragment.DetailMakananFragment
 import com.example.kasircafeapp.ui.viewmodel.MakananViewModel
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class MakananActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMakananBinding
@@ -24,10 +29,34 @@ class MakananActivity : AppCompatActivity() {
         setupToolbar()
         setupRecyclerView()
         observeViewModel()
+        syncToFirebase()
+        makananViewModel.syncMakanan()
 
         binding.fabAddMakanan.setOnClickListener {
             showTambahMakananFragment(null)
         }
+    }
+    private fun syncToFirebase() {
+        val firebaseRef = FirebaseDatabase.getInstance().getReference("makanan")
+        firebaseRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val makananList = mutableListOf<Makanan>()
+                for (dataSnapshot in snapshot.children) {
+                    val makanan = dataSnapshot.getValue(Makanan::class.java)
+                    if (makanan != null) {
+                        makananList.add(makanan)
+                    }
+                }
+                makananViewModel.syncLocalDatabase(makananList) // Sinkron ke database lokal
+                runOnUiThread {
+                    (binding.recyclerViewMakanan.adapter as MakananAdapter).setMakanan(makananList)
+                }
+            }
+
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
     }
 
     private fun setupToolbar() {
@@ -76,10 +105,10 @@ class MakananActivity : AppCompatActivity() {
     private fun showDetailMakananFragment(makanan: Makanan) {
         val fragment = DetailMakananFragment().apply {
             arguments = Bundle().apply {
-                putString("nama", makanan.nama)
-                putDouble("harga", makanan.harga.toDouble())
-                putString("deskripsi", makanan.deskripsi)
-                putString("kategori", makanan.kategori)
+                putString("nama", makanan.nama_makanan)
+                putDouble("harga", makanan.harga_makanan.toDouble())
+                putString("deskripsi", makanan.deskripsi_makanan)
+                putString("kategori", makanan.kategori_makanan)
             }
         }
         val fragmentTransaction = supportFragmentManager.beginTransaction()

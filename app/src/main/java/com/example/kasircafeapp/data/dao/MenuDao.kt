@@ -16,7 +16,7 @@ interface MenuDao {
     @Query("SELECT * FROM menu_table WHERE makanan_id = :makananId OR minuman_id = :minumanId")
     suspend fun getMenuByMakananAndMinuman(makananId: Int?, minumanId: Int?): Menu?
 
-    @Query("SELECT * FROM makanan")
+    @Query("SELECT * FROM makanan_table")
     fun getAllMakanan(): LiveData<List<Makanan>>
 
     @Query("SELECT * FROM minuman_table")
