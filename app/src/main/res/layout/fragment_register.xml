@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    tools:context=".ui.view.fragment.RegisterFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/logincard"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/login_card"
+            android:elevation="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gh0"
+            app:layout_constraintVertical_bias="0.0">
+
+            <TextView
+                android:id="@+id/tvUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Username"
+                android:textSize="16sp"
+                android:textColor="@color/gojek_blue"
+                app:layout_constraintStart_toStartOf="@+id/gv1"
+                app:layout_constraintTop_toBottomOf="@+id/gh1" />
+            <EditText
+                android:id="@+id/etUsername"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Username"
+                android:layout_marginTop="5dp"
+                android:drawablePadding="12dp"
+                android:padding="12dp"
+                android:background="@drawable/custom_input"
+                android:drawableStart="@drawable/ic_username"
+                app:layout_constraintTop_toBottomOf="@id/tvUsername"
+                app:layout_constraintStart_toEndOf="@id/gv1"
+                app:layout_constraintEnd_toStartOf="@id/gv2"/>
+            <TextView
+                android:id="@+id/tvPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Password"
+                android:textSize="16sp"
+                android:textColor="@color/gojek_blue"
+                app:layout_constraintStart_toStartOf="@+id/gv1"
+                app:layout_constraintTop_toBottomOf="@+id/etUsername"
+                android:layout_marginTop="12dp"/>
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="0dp"
+                android:padding="12dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/custom_input"
+                android:drawablePadding="12dp"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="Password"
+                android:drawableStart="@drawable/ic_password"
+                app:layout_constraintTop_toBottomOf="@id/tvPassword"
+                app:layout_constraintStart_toEndOf="@id/gv1"
+                app:layout_constraintEnd_toStartOf="@id/gv2"/>
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:textSize="16sp"
+                android:textColor="@color/gojek_blue"
+                android:layout_marginTop="12dp"
+                app:layout_constraintStart_toEndOf="@id/gv1"
+                app:layout_constraintTop_toBottomOf="@id/etPassword" />
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:layout_marginTop="5dp"
+                android:drawablePadding="12dp"
+                android:padding="12dp"
+                android:background="@drawable/custom_input"
+                android:drawableStart="@drawable/ic_email"
+                app:layout_constraintTop_toBottomOf="@id/tvEmail"
+                app:layout_constraintStart_toEndOf="@id/gv1"
+                app:layout_constraintEnd_toStartOf="@id/gv2"/>
+            <Button
+                android:id="@+id/btnRegister"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="#0c38c9"
+                android:padding="12dp"
+                android:text="Register"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@id/etEmail"
+                app:layout_constraintStart_toEndOf="@id/gv1"
+                app:layout_constraintEnd_toStartOf="@id/gv2"/>
+
+            <!--            <Button-->
+            <!--                android:id="@+id/btnLogin"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="32dp"-->
+            <!--                android:backgroundTint="#0c38c9"-->
+            <!--                android:padding="12dp"-->
+            <!--                android:text="Login"-->
+            <!--                android:textSize="16sp"-->
+            <!--                app:layout_constraintEnd_toStartOf="@id/gv2"-->
+            <!--                app:layout_constraintStart_toEndOf="@id/gv1"-->
+            <!--                app:layout_constraintTop_toBottomOf="@id/etPassword" />-->
+            <TextView
+                android:id="@+id/tvToLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Kembali"
+                android:textColor="@android:color/holo_blue_light"
+                android:textSize="13sp"
+                app:layout_constraintTop_toBottomOf="@id/btnRegister"
+                app:layout_constraintStart_toEndOf="@id/gv1"
+                app:layout_constraintEnd_toStartOf="@id/gv2"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gh1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.15" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gh2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.8" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.10" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.90" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gh0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.24" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Halo,\nRegister dulu gan!"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            app:layout_constraintStart_toEndOf="@id/gvo1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/gh0"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gvo1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.10" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gvo2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.90" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
