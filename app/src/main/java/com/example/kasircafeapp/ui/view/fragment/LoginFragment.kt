@@ -20,16 +20,13 @@ class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
     private val adminViewModel: AdminViewModel by viewModels()
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
 
     ): View? {
-        // Inflate the layout for this fragment
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -43,7 +40,7 @@ class LoginFragment : Fragment() {
                 lifecycleScope.launch {
                     val admin = adminViewModel.getAdmin(username, password)
                     if (admin != null) {
-                        Toast.makeText(requireContext(), "Login Successful", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "Login Berhasil", Toast.LENGTH_SHORT).show()
                         val intent = Intent(requireContext(), MainActivity::class.java)
                         startActivity(intent)
                         requireActivity().finish()
@@ -52,7 +49,7 @@ class LoginFragment : Fragment() {
                     }
                 }
             } else {
-                Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Harap isi semua field", Toast.LENGTH_SHORT).show()
             }
         }
 

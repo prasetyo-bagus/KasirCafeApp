@@ -1,9 +1,11 @@
 package com.example.kasircafeapp.ui.view
 
+import android.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.kasircafeapp.data.entity.Makanan
@@ -35,17 +37,25 @@ class TambahMakananFragment : Fragment() {
 
         makananViewModel = (activity as MakananActivity).makananViewModel
 
+        val kategoriList = listOf("Makanan Utama", "Makanan Penutup", "Makanan Pendamping", "Cemilan")
+        val kategoriAdapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_dropdown_item_1line,
+            kategoriList
+        )
+        binding.spinnerKategori.setAdapter(kategoriAdapter)
         // Mengisi data jika makanan tidak null
         makanan?.let {
             binding.editTextNama.setText(it.nama_makanan)
             binding.editTextHarga.setText(it.harga_makanan.toString())
             binding.editTextDeskripsi.setText(it.deskripsi_makanan)
-            binding.editTextKategori.setText(it.kategori_makanan)
+            binding.spinnerKategori.setText(it.kategori_makanan, false)
         }
 
         binding.buttonSimpan.setOnClickListener {
             val namaMakanan = binding.editTextNama.text.toString()
             val hargaMakanan = binding.editTextHarga.text.toString().toDoubleOrNull()
+            val kategoriMakanan = binding.spinnerKategori.text.toString()
 
             if (namaMakanan.isEmpty() || hargaMakanan == null) {
                 Toast.makeText(requireContext(), "Nama dan Harga tidak boleh kosong", Toast.LENGTH_SHORT).show()
@@ -58,7 +68,7 @@ class TambahMakananFragment : Fragment() {
                 nama_makanan = binding.editTextNama.text.toString(),
                 harga_makanan = binding.editTextHarga.text.toString().toDouble(),
                 deskripsi_makanan = binding.editTextDeskripsi.text.toString(),
-                kategori_makanan = binding.editTextKategori.text.toString()
+                kategori_makanan = kategoriMakanan
             )
 
             if (makanan == null) {

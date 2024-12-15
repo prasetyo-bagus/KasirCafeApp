@@ -26,7 +26,6 @@ class RegisterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -39,17 +38,15 @@ class RegisterFragment : Fragment() {
             if (username.isNotEmpty() && password.isNotEmpty() && email.isNotEmpty()) {
                 val admin = Admin(username = username, password = password, email = email)
                 adminViewModel.registerAdmin(admin)
-                Toast.makeText(requireContext(), "Registration Successful", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Registrasi berhasil", Toast.LENGTH_SHORT).show()
 
-                // Clear input fields
                 binding.etUsername.text.clear()
                 binding.etPassword.text.clear()
                 binding.etEmail.text.clear()
 
-                // Navigate back to LoginFragment
                 Navigation.findNavController(view).navigate(R.id.registerToLogin)
             } else {
-                Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Harap isi semua field", Toast.LENGTH_SHORT).show()
             }
         }
         binding.tvToLogin.setOnClickListener {
