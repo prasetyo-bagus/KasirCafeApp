@@ -148,6 +148,12 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/total_harga"
+                android:padding="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/bayar"
                 android:padding="8dp"/>
 
@@ -188,14 +194,24 @@
             app:layout_constraintEnd_toEndOf="parent">
 
             <TextView
+                android:id="@+id/tv_total_harga"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:textStyle="bold"
+                android:text=""
+                tools:text="Rp. 125.000,00"/>
+
+            <TextView
                 android:id="@+id/tv_jumlah_bayar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:padding="8dp"
                 tools:text="Rp. 100000"/>
 
             <TextView
-                android:id="@+id/tv_jumlah_transaksi"
+                android:id="@+id/tv_jumlah_pesanan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=""

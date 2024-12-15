@@ -15,4 +15,5 @@
     <string name="total_pesanan">Total Pesanan</string>
     <string name="kembalian">Kembalian</string>
     <string name="jumlah_bayar">jumlah bayar</string>
+    <string name="total_harga">Total Harga</string>
 </resources>

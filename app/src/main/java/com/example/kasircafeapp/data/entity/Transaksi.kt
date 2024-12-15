@@ -14,11 +14,11 @@ import java.io.Serializable
 @Parcelize
 data class Transaksi(
     @PrimaryKey() val id_transaksi: String = "",
-    val namaPesanan: List<String>,
-    val jumlahPesanan: Int,
-    val jumlahBayar: Double,
-    val totalHarga: Double,
-    val nominalKembalian: Double,
-    val tanggal: String,
+    val namaPesanan: List<String> = emptyList(),
+    val jumlahPesanan: Int = 0,
+    val jumlahBayar: Double = 0.0,
+    val totalHarga: Double = 0.0,
+    val nominalKembalian: Double = 0.0,
+    val tanggal: String = "",
     val synchronize: Boolean = false
 ) : Parcelable
