@@ -38,6 +38,8 @@ class LaporanTransaksiFragment : Fragment() {
         binding?.recyclerViewLaporan?.adapter = adapter
 
         observeLocalData()
+        syncFirebaseData()
+        menuViewModel.syncUnsyncedData()
     }
 
     private fun observeLocalData() {
@@ -48,6 +50,10 @@ class LaporanTransaksiFragment : Fragment() {
                 Toast.makeText(requireContext(), "Tidak ada data transaksi", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    private fun syncFirebaseData() {
+        menuViewModel.syncTransaksi()
     }
 
     override fun onDestroyView() {

@@ -8,25 +8,32 @@
     android:background="@color/white"
     tools:context=".ui.view.MainActivity">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelinebottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95" />
+
     <FrameLayout
         android:id="@+id/fragment_container_laporan_transaksi"
         android:name="com.example.kasircafeapp.ui.view.fragment.LaporanTransaksiFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/guidelinebottom"
         app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="gone" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvDashboard"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:cardBackgroundColor="@color/gojek_blue"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:cardBackgroundColor="@color/gojek_blue">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -57,12 +64,12 @@
                 android:id="@+id/tvHeadline1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="24dp"
                 android:text="Aplikasi Kasir Pintar "
-                app:layout_constraintLeft_toRightOf="@id/guideline_left_card"
-                app:layout_constraintBottom_toTopOf="@id/guideline_mid_card"/>
+                android:textColor="@color/white"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/guideline_mid_card"
+                app:layout_constraintLeft_toRightOf="@id/guideline_left_card" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -71,9 +78,8 @@
                 android:textColor="@color/white"
                 android:textSize="24dp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@id/guideline_mid_card"
                 app:layout_constraintLeft_toRightOf="@id/guideline_left_card"
-                />
+                app:layout_constraintTop_toBottomOf="@id/guideline_mid_card" />
 
             <ImageView
                 android:layout_width="150dp"
@@ -100,8 +106,8 @@
             android:id="@+id/buttonMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
             app:cardCornerRadius="8dp">
@@ -109,9 +115,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:gravity="center"
                 android:orientation="vertical"
-                android:padding="16dp"
-                android:gravity="center">
+                android:padding="16dp">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="120dp"
@@ -122,17 +128,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/menu_dashboard"/>
+                        android:src="@drawable/menu_dashboard" />
 
                 </androidx.cardview.widget.CardView>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="Menu"
                     android:textAlignment="center"
                     android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:text="Menu"/>
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -150,9 +156,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:gravity="center"
                 android:orientation="vertical"
-                android:padding="16dp"
-                android:gravity="center">
+                android:padding="16dp">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="120dp"
@@ -163,17 +169,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/makanan_dashboard"/>
+                        android:src="@drawable/makanan_dashboard" />
 
                 </androidx.cardview.widget.CardView>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="Makanan"
                     android:textAlignment="center"
                     android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:text="Makanan"/>
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -201,9 +207,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:gravity="center"
                 android:orientation="vertical"
-                android:padding="16dp"
-                android:gravity="center">
+                android:padding="16dp">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="120dp"
@@ -214,17 +220,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/minuman_dashboard"/>
+                        android:src="@drawable/minuman_dashboard" />
 
                 </androidx.cardview.widget.CardView>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="Minuman"
                     android:textAlignment="center"
                     android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:text="Minuman"/>
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -241,9 +247,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:gravity="center"
                 android:orientation="vertical"
-                android:padding="16dp"
-                android:gravity="center">
+                android:padding="16dp">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="120dp"
@@ -254,17 +260,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/admin_dashboard"/>
+                        android:src="@drawable/admin_dashboard" />
 
                 </androidx.cardview.widget.CardView>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="Admin"
                     android:textAlignment="center"
                     android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:text="Admin"/>
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -290,9 +296,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:gravity="center"
                 android:orientation="vertical"
-                android:padding="16dp"
-                android:gravity="center">
+                android:padding="16dp">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="120dp"
@@ -303,17 +309,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/laporan_dashboard"/>
+                        android:src="@drawable/laporan_dashboard" />
 
                 </androidx.cardview.widget.CardView>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="Laporan"
                     android:textAlignment="center"
                     android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:text="Laporan"/>
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
