@@ -69,7 +69,7 @@
                     val fragment = DetilTransaksiFragment()
                     fragment.arguments = bundle
 
-                    // Mengganti fragment di activity
+                    // Mengganti tampilan activity
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container_transaksi, fragment)
                         .addToBackStack(null)
@@ -136,6 +136,11 @@
         }
 
         private fun jumlahBayarValid(jumlahBayarString: String, totalHarga: Double): Boolean {
+            if (totalHarga <= 0) {
+                Toast.makeText(this, "Buat pesanan terlebih dahulu", Toast.LENGTH_SHORT).show()
+                return false
+            }
+
             if (jumlahBayarString.isEmpty()) {
                 Toast.makeText(this, "Jumlah bayar tidak boleh kosong", Toast.LENGTH_SHORT).show()
                 return false
@@ -169,5 +174,23 @@
             val locale = Locale("id", "ID")
             val formatter = NumberFormat.getCurrencyInstance(locale)
             return formatter.format(amount)
+        }
+
+        override fun onBackPressed() {
+            if (supportFragmentManager.backStackEntryCount > 0) {
+                // Hapus fragment dari Back Stack
+                supportFragmentManager.popBackStack()
+
+                binding.apply {
+                    recyclerViewMenuMakanan.visibility = View.VISIBLE
+                    recyclerViewMenuMinuman.visibility = View.VISIBLE
+                    tvTitleMakanan.visibility = View.VISIBLE
+                    tvTitleMinuman.visibility = View.VISIBLE
+                    cardView.visibility = View.VISIBLE
+                    fragmentContainerTransaksi.visibility = View.GONE
+                }
+            } else {
+                super.onBackPressed()
+            }
         }
     }

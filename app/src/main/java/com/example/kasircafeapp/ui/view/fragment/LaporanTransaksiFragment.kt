@@ -5,56 +5,54 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kasircafeapp.R
+import com.example.kasircafeapp.databinding.FragmentLaporanTransaksiBinding
+import com.example.kasircafeapp.ui.adapter.LaporanTransaksiAdapter
+import com.example.kasircafeapp.ui.viewmodel.MenuViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [LaporanTransaksiFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class LaporanTransaksiFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var _binding: FragmentLaporanTransaksiBinding? = null
+    private val binding get() = _binding
+    private lateinit var adapter: LaporanTransaksiAdapter
+    private lateinit var menuViewModel: MenuViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_laporan_transaksi, container, false)
+        _binding = FragmentLaporanTransaksiBinding.inflate(inflater, container, false)
+        return binding?.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment LaporanTransaksiFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            LaporanTransaksiFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        menuViewModel = ViewModelProvider(requireActivity()).get(MenuViewModel::class.java)
+        adapter = LaporanTransaksiAdapter(emptyList())
+        binding?.recyclerViewLaporan?.layoutManager = LinearLayoutManager(requireContext())
+        binding?.recyclerViewLaporan?.adapter = adapter
+
+        observeLocalData()
     }
+
+    private fun observeLocalData() {
+        menuViewModel.allTransaksi.observe(viewLifecycleOwner, Observer { transaksiList ->
+            if (transaksiList.isNotEmpty()) {
+                adapter.updateData(transaksiList)
+            } else {
+                Toast.makeText(requireContext(), "Tidak ada data transaksi", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 }

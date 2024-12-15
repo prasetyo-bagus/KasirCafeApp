@@ -71,7 +71,6 @@ class DetilTransaksiFragment : Fragment() {
         // Menerima data transaksi dari Bundle
         arguments?.let {
             transaksi = it.getParcelable("transaksi")
-                ?: throw IllegalArgumentException("Data Transaksi Tidak Ditemukan")
         }
 
         transaksi?.let { transaksiData ->
@@ -80,8 +79,9 @@ class DetilTransaksiFragment : Fragment() {
             val pemisahNamaPesanan = namaPesanan.joinToString("\n")
             binding.tvNamaPesananTransaksi.text = pemisahNamaPesanan
             binding.tvTanggalTransaksi.text = transaksiData.tanggal
+            binding.tvTotalHarga.text = "Rp. ${transaksiData.totalHarga}"
             binding.tvJumlahBayar.text = "RP. ${transaksiData.jumlahBayar.toString()}"
-            binding.tvJumlahTransaksi.text = transaksiData.jumlahPesanan.toString()
+            binding.tvJumlahPesanan.text = transaksiData.jumlahPesanan.toString()
             binding.tvTotalTransaksi.text = "Rp. ${transaksiData.totalHarga}"
             binding.tvNominalKembalian.text = "Rp. ${transaksiData.nominalKembalian.toString()}"
 

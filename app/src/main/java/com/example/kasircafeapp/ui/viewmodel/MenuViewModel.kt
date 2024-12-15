@@ -16,15 +16,6 @@ import kotlinx.coroutines.launch
 
 class MenuViewModel(application: Application) : AndroidViewModel(application) {
 
-//    private val transaksiDao: TransaksiDao = CafeDatabase.getDatabase(application).transaksiDao()
-
-//    //     Fungsi untuk memasukkan transaksi ke database
-//    fun insertTransaksi(transaksi: Transaksi) {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            transaksiDao.insertTransaksi(transaksi)
-//        }
-//    }
-
     private val repository: TransaksiRepository
     val allTransaksi: LiveData<List<Transaksi>>
     init {
@@ -53,5 +44,4 @@ class MenuViewModel(application: Application) : AndroidViewModel(application) {
     fun syncTransaksi() = viewModelScope.launch {
         repository.syncWithFirebase()
     }
-
 }
