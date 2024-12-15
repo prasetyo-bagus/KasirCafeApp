@@ -15,11 +15,5 @@
     <string name="total_pesanan">Total Pesanan</string>
     <string name="kembalian">Kembalian</string>
     <string name="jumlah_bayar">jumlah bayar</string>
-    <!--    makanan-->
-    <string-array name="kategori_makanan">
-        <item>Makanan Utama</item>
-        <item>Makanan Penutup</item>
-        <item>Makanan Pendamping</item>
-        <item>Cemilan</item>
-    </string-array>
+    <string name="total_harga">Total Harga</string>
 </resources>
