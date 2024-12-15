@@ -30,6 +30,7 @@ class RegisterFragment : Fragment() {
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.btnRegister.setOnClickListener {
             val username = binding.etUsername.text.toString()
@@ -37,8 +38,8 @@ class RegisterFragment : Fragment() {
             val email = binding.etEmail.text.toString()
 
             if (username.isNotEmpty() && password.isNotEmpty() && email.isNotEmpty()) {
-                val admin = Admin(username = username, password = password, email = email)
-                adminViewModel.registerAdmin(admin)
+                val admin = Admin(username_admin = username, password_admin = password, email_admin = email)
+                adminViewModel.insert(admin)
                 Toast.makeText(requireContext(), "Registration Successful", Toast.LENGTH_SHORT).show()
 
                 // Clear input fields

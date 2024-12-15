@@ -5,9 +5,11 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "admin_table")
 data class Admin(
-    @PrimaryKey(autoGenerate = true)
-    val id_admin: Int = 0,
-    val username: String,
-    val password: String,
-    val email: String
+
+    @PrimaryKey
+    val id_admin: String = "",
+    val username_admin: String = "",
+    val password_admin: String = "",
+    val email_admin: String = "",
+    val syncronize: Boolean = false
 )

@@ -7,10 +7,17 @@ import androidx.fragment.app.commit
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kasircafeapp.R
 import com.example.kasircafeapp.data.entity.Admin
+import com.example.kasircafeapp.data.entity.Makanan
 import com.example.kasircafeapp.databinding.ActivityListAdminBinding
 import com.example.kasircafeapp.ui.adapter.AdminAdapter
+import com.example.kasircafeapp.ui.adapter.MakananAdapter
 import com.example.kasircafeapp.ui.viewmodel.AdminViewModel
 import com.example.kasircafeapp.ui.view.fragment.FormAdminFragment
+import com.example.kasircafeapp.ui.view.fragment.RegisterFragment
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class ListAdminActivity : AppCompatActivity() {
     private lateinit var binding: ActivityListAdminBinding
@@ -21,31 +28,46 @@ class ListAdminActivity : AppCompatActivity() {
         binding = ActivityListAdminBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        setupRecyclerView()
+        observeViewModel()
+        syncToFirebase()
 
-        adminViewModel.getAllAdmins().observe(this) { adminList ->
-            binding.recyclerView.adapter = AdminAdapter(adminList, { admin ->
-                openEditAdminFragment(admin)
-            }, { admin ->
-                adminViewModel.deleteAdmin(admin)
-            })
+    }
+
+    private fun setupRecyclerView() {
+        val adapter = AdminAdapter(
+            onDeleteClick = { admin -> adminViewModel.delete(admin) },
+        )
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+    }
+
+    private fun observeViewModel() {
+        adminViewModel.allAdmins.observe(this) { adminList ->
+            adminList?.let { (binding.recyclerView.adapter as AdminAdapter).setAdmins(it) }
         }
     }
 
-    private fun openEditAdminFragment(admin: Admin) {
-        val fragment = FormAdminFragment().apply {
-            arguments = Bundle().apply {
-                putInt("admin_id", admin.id_admin)
-                putString("username", admin.username)
-                putString("password", admin.password)
-                putString("email", admin.email)
+    private fun syncToFirebase() {
+        val firebaseRef = FirebaseDatabase.getInstance().getReference("admins")
+        firebaseRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val adminList = mutableListOf<Admin>()
+                for (dataSnapshot in snapshot.children) {
+                    val admin = dataSnapshot.getValue(Admin::class.java)
+                    if (admin != null) {
+                        adminList.add(admin)
+                    }
+                }
+                adminViewModel.syncLocalDatabase(adminList)
+                runOnUiThread {
+                    (binding.recyclerView.adapter as AdminAdapter).setAdmins(adminList)
+                }
             }
-        }
 
-        // Gantikan fragment saat ini dengan FormAdminFragment
-        supportFragmentManager.commit {
-            replace(R.id.fragment_container, fragment)
-            addToBackStack(null)  // Menambahkan fragment ke back stack
-        }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
     }
 }
