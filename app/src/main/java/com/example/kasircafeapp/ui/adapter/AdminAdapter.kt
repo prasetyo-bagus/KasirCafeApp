@@ -17,7 +17,7 @@ class AdminAdapter(
         fun bind(admin: Admin) {
             binding.admin = admin
             binding.tvUsername.text = admin.username_admin
-            binding.btnDelete.setOnClickListener { onDeleteClick(admin) }
+        //  binding.btnDelete.setOnClickListener { onDeleteClick(admin) }
         }
     }
 
