@@ -102,4 +102,5 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.3")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.3")
 
+    implementation ("com.google.firebase:firebase-auth:21.0.5")
 }
