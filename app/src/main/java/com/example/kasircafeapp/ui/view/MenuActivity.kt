@@ -169,7 +169,6 @@
             binding.tvJumlahPesanan.text = jumlahPesanan.toString()
         }
 
-        // Helper function to format currency (IDR)
         private fun formatCurrency(amount: Double): String {
             val locale = Locale("id", "ID")
             val formatter = NumberFormat.getCurrencyInstance(locale)
